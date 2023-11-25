@@ -1,0 +1,27 @@
+@import "media-queries";
+@import "../../../assets/styles/flags.css";
+
+:host {
+  .grid-3 {
+    // TODO:
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+::ng-deep .cdk-overlay-container {
+  .flag {
+    margin-right: 8px;
+  }
+
+  .dropdown-filter {
+    position: sticky;
+    height: 42px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    padding: 0 16px;
+    width: 100%;
+  }
+}

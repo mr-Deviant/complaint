@@ -1,0 +1,136 @@
+<form [formGroup]="companyService.form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="grid-row grid-3">
+    <mat-form-field>
+      <mat-label>Название</mat-label>
+      <input matInput formControlName="name" autofocus />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Сайт</mat-label>
+      <input matInput formControlName="site" type="url" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" type="email" />
+    </mat-form-field>
+  </div>
+
+  <div formArrayName="phones" class="grid-row grid-3">
+    <ng-container *ngFor="let phone of phones.controls; let i = index; let last = last">
+      <mat-form-field>
+        <mat-label>Телефон</mat-label>
+        <input matInput [formControlName]="i" type="tel" />
+        <button
+          *ngIf="last && phones.controls.length < maxPhonesNum"
+          matSuffix
+          mat-icon-button
+          (click)="addPhone()"
+          aria-label="Добавить телефон"
+        >
+          <mat-icon fontIcon="icon-add-circle"></mat-icon>
+        </button>
+        <button
+          *ngIf="(!last || phones.controls.length === maxPhonesNum) && phones.controls.length > 1"
+          matSuffix
+          mat-icon-button
+          (click)="removePhone(i)"
+          aria-label="Удалить телефон"
+        >
+          <mat-icon fontIcon="icon-delete"></mat-icon>
+        </button>
+      </mat-form-field>
+    </ng-container>
+  </div>
+
+  <div class="grid-row grid-3">
+    <!-- TODO: make custom control-->
+    <mat-form-field>
+      <mat-label>Страна</mat-label>
+      <mat-select formControlName="countryId">
+        <input
+          type="text"
+          [formControl]="companyService.countriesFilter"
+          class="dropdown-filter"
+          placeholder="Поиск"
+          autocomplete="off"
+          #countriesFilter
+        />
+        <!-- <mat-option [value]="null">Не выбрано</mat-option>-->
+        <ng-container *ngIf="countries$ | async | filter: countriesFilter.value:'nameRu' as countries">
+          <mat-option *ngFor="let country of countries" [value]="country.code">
+            <div class="flag" [ngClass]="'flag-' + country.code"></div>{{ country.nameRu }}
+          </mat-option>
+          <mat-option *ngIf="!countries.length" disabled>Ничего не найдено</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- TODO: make field with autocomplete -->
+    <mat-form-field>
+      <mat-label>Город</mat-label>
+      <input matInput formControlName="cityName" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Категория</mat-label>
+      <mat-select formControlName="categoryId">
+        <input
+          type="text"
+          [formControl]="companyService.categoriesFilter"
+          class="dropdown-filter"
+          placeholder="Поиск"
+          autocomplete="off"
+          #categoriesFilter
+        />
+        <!-- <mat-option [value]="null">Не выбрано</mat-option>-->
+        <ng-container *ngFor="let categoryGroup of categories$ | async">
+          <mat-optgroup
+            *ngIf="
+              (categoryGroup.name | includes: categoriesFilter.value)
+              || (categoryGroup.subCategories | filter: categoriesFilter.value:'name').length
+            "
+            [label]="categoryGroup.name"
+          >
+            <ng-container *ngFor="let category of categoryGroup.subCategories">
+              <mat-option
+                *ngIf="
+                  (categoryGroup.name | includes: categoriesFilter.value)
+                  || (category.name | includes: categoriesFilter.value)
+                "
+                [value]="category.id"
+              >
+                {{ category.name }}
+              </mat-option>
+            </ng-container>
+          </mat-optgroup>
+        </ng-container>
+<!--        TODO:-->
+<!--        <mat-option *ngIf="!categories.length" disabled>Ничего не найдено</mat-option>-->
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="grid-row grid-1">
+    <mat-form-field>
+      <mat-label>Заголовок</mat-label>
+      <input matInput formControlName="shortDescription" type="text" />
+    </mat-form-field>
+  </div>
+
+  <div class="grid-row grid-1">
+    <mat-form-field>
+      <mat-label>Описание</mat-label>
+      <textarea
+        matInput
+        formControlName="fullDescription"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="25"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="grid-row">
+    <button mat-flat-button color="primary">Сохранить</button>
+  </div>
+</form>

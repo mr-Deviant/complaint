@@ -1,0 +1,31 @@
+@import "~normalize.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@import "assets/icomoon/style";
+@import "assets/styles/variables";
+@import "assets/styles/grid";
+@import "assets/styles/media-queries";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// TODO: move to separate files
+.mat-form-field-required-marker {
+  color: #f44336;
+}
+
+.mat-optgroup-label {
+  font-weight: bold;
+}
