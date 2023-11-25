@@ -2,7 +2,7 @@ name: Deploy website
 
 on:
   push:
-    branches: [main]
+    branches: [test]
 
 jobs:
   web-deploy:
@@ -24,7 +24,7 @@ jobs:
         npm run build
         mv ./dist/complaint/ ../build
 
-    - name: 🔨 Build backend
+    - name: 🔨 Build backend 12
       run: |
         cd backend
         npm ci --force
