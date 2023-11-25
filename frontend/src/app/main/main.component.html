@@ -1,16 +1,22 @@
-<header class="main__header">
-  <div class="main__logo">
-    <h1 style="font-size: 27px; line-height: 1; margin-bottom: 0;">Попуск</h1>
-    <h2 style="font-size: 13px; line-height: 1; margin-bottom: 0;">Каталог жалоб</h2>
-  </div>
-  <div>
-    <button mat-flat-button color="accent">Добавить жалобу</button>
+<header class="main-header">
+  <div class="main-header__inner">
+    <a routerLink="/" class="main-logo">
+      <h1 class="main-logo__title">Попуск</h1>
+      <h2 class="main-logo__description">Каталог анонимных жалоб</h2>
+    </a>
+
+    <div>
+      <a routerLink="/add/company" mat-flat-button color="accent">Добавить жалобу</a>
+    </div>
   </div>
 </header>
-<div class="main__content" role="main" style="border-top: 60px solid transparent;">
-  Content
-  <router-outlet></router-outlet>
+<div class="main-content">
+  <div class="main-content__inner" role="main">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<footer class="main__footer" style="border: 1px solid red;">
-  <small role="contentinfo">Footer</small>
+<footer class="main-footer">
+  <div class="main-footer__inner">
+    <small role="contentinfo">Footer</small>
+  </div>
 </footer>

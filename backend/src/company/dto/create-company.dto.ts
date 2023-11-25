@@ -7,7 +7,7 @@ export class CreateCompanyDto {
   email?: string;
   site?: string; // TODO: Instagram, facebook, vk,
   countryId: number;
-  cityId?: number;
+  cityName?: string;
   categoryId: number;
   shortDescription: string;
   fullDescription: string;

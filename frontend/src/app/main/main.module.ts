@@ -8,12 +8,12 @@ import { MainComponent } from './main.component';
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
   ],
   imports: [
     CommonModule,
     MatButtonModule,
-    MainRoutingModule
-  ]
+    MainRoutingModule,
+  ],
 })
-export class MainModule { }
+export class MainModule {}

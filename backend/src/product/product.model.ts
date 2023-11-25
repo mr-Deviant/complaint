@@ -5,11 +5,11 @@ export interface ProductModel extends Base {} // Add _id prop
 
 // TODO: extend common fields from common complaint
 export class ProductModel {
-  @prop()
-  userId: string;
-
-  @prop({ type: () => [String] })
-  photos?: string[];
+  // @prop()
+  // userId: string;
+  //
+  // @prop({ type: () => [String] })
+  // photos?: string[];
 
   @prop()
   name?: string;
@@ -18,7 +18,7 @@ export class ProductModel {
   countryId: number;
 
   @prop()
-  cityId?: number;
+  cityName?: string;
 
   @prop()
   categoryId: number;

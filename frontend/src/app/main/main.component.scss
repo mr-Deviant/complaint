@@ -1,29 +1,67 @@
-// TODO: variables
+@import "media-queries";
 
 :host {
+  --main-header-height: 60px;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
   .main {
-    &__header,
-    &__content,
-    &__footer {
-      max-width: 1200px;
+    &-header__inner,
+    &-content__inner,
+    &-footer__inner {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: calc($desktop-width - 20px);
       padding-left: 10px;
       padding-right: 10px;
     }
 
-    &__header {
+    &-header {
       position: fixed;
-      align-items: center;
       background-color: #f9fafb;
       border-bottom: 1px solid #dededf;
-      display: flex;
-      height: 60px;
-      justify-content: space-between;
       width: 100%;
+
+      &__inner {
+        align-items: center;
+        display: flex;
+        height: var(--main-header-height);
+        justify-content: space-between;
+      }
     }
 
-    &__content {
+    &-logo {
+      color: #000;
+      text-decoration: none;
+
+      &__title,
+      &__description {
+        line-height: 1;
+        margin-bottom: 0;
+      }
+
+      &__title {
+        font-size: 27px;
+      }
+
+      &__description {
+        font-size: 13px;
+      }
+    }
+
+    &-content {
+      border-top: var(--main-header-height) solid transparent;
+      flex: 1 1 auto;
       padding-top: 10px;
       padding-bottom: 10px;
+    }
+
+    &-footer {
+      background-color: #f9fafb;
+      border-top: 1px solid #dededf;
+      flex: 0 0 auto;
     }
   }
 }

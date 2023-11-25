@@ -5,14 +5,14 @@ import { Types } from 'mongoose';
 export interface CompanyModel extends Base {} // Add _id prop
 
 export class CompanyModel {
-  @prop()
-  userId: string;
-
-  @prop({ type: () => [String] })
-  photos?: string[];
-
-  @prop({ type: () => [Types.ObjectId] })
-  personsId?: Types.ObjectId[];
+  // @prop()
+  // userId: string;
+  //
+  // @prop({ type: () => [String] })
+  // photos?: string[];
+  //
+  // @prop({ type: () => [Types.ObjectId] })
+  // personsId?: Types.ObjectId[];
 
   @prop()
   name?: string;
@@ -30,7 +30,7 @@ export class CompanyModel {
   countryId: number;
 
   @prop()
-  cityId?: number;
+  cityName?: string;
 
   @prop()
   categoryId: number;

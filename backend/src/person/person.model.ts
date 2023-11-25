@@ -4,11 +4,11 @@ import { Base } from '@typegoose/typegoose/lib/defaultClasses';
 export interface PersonModel extends Base {} // Add _id prop
 
 export class PersonModel {
-  @prop()
-  userId: string;
-
-  @prop({ type: () => [String] })
-  photos?: string[];
+  // @prop()
+  // userId: string;
+  //
+  // @prop({ type: () => [String] })
+  // photos?: string[];
 
   @prop()
   surname?: string;
@@ -32,7 +32,7 @@ export class PersonModel {
   countryId: number;
 
   @prop()
-  cityId?: number;
+  cityName?: string;
 
   @prop()
   categoryId: number;

@@ -1,38 +1,28 @@
-// https://davidwalsh.name/write-media-queries-sass
-
-// TODO:
-
+// CSS variables are not available im media query declaration
 $mobile-width: 320px;
 $tablet-width: 768px;
 $desktop-width: 1280px;
-$desktop-width-gt-lg: 1920px;
 
 @mixin mobile {
-    @media (max-width: #{$tablet-width - 0.1px}) {
+    @media (max-width: calc($tablet-width - 0.1px)) {
         @content;
     }
 }
 
 @mixin tablet {
-    @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 0.1px}) {
+    @media (min-width: $tablet-width) and (max-width: calc($desktop-width - 0.1px)) {
         @content;
     }
 }
 
 @mixin mobile-and-tablet {
-    @media (max-width: #{$desktop-width - 0.1px}) {
+    @media (max-width: calc($desktop-width - 0.1px)) {
         @content;
     }
 }
 
 @mixin desktop {
-    @media (min-width: #{$desktop-width}) {
-        @content;
-    }
-}
-
-@mixin desktop-gt-lg {
-    @media (min-width: #{$desktop-width-gt-lg}) {
+    @media (min-width: $desktop-width) {
         @content;
     }
 }

@@ -1,0 +1,66 @@
+.grid-1,
+.grid-2,
+.grid-3,
+.grid-4,
+.grid-6,
+.grid-12,
+.grid-1-2,
+.grid-2-1 {
+  display: grid;
+  grid-column-gap: var(--grid-column-gap);
+  // grid-row-gap: var(--grid-column-gap); // For implicit grid
+}
+
+.grid {
+  &-row {
+    // margin-bottom: var(--form-grid-margin-bottom);
+  }
+
+  &-1 {
+    grid-template-columns: 1fr;
+  }
+
+  &-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  &-12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  &-1-2 {
+    grid-template-columns: repeat(12, 1fr);
+
+    :nth-child(odd) {
+      grid-column: 1 / 5;
+    }
+
+    :nth-child(even) {
+      grid-column: 5 / 13;
+    }
+  }
+
+  &-2-1 {
+    grid-template-columns: repeat(12, 1fr);
+
+    :nth-child(odd) {
+      grid-column: 1 / 9;
+    }
+
+    :nth-child(even) {
+      grid-column: 9 / 13;
+    }
+  }
+}

@@ -1,0 +1,235 @@
+// Source: https://yandex.ru/support/nmaps/app_poi.html
+db.Category.insertMany([
+  {
+    "name": "Культура",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Художественные изделия", "url": ""},
+      {"_id": ObjectId(), "name": "Архивы и библиотеки"},
+      {"_id": ObjectId(), "name": "Музыка и хореография"},
+      {"_id": ObjectId(), "name": "Театр"},
+      {"_id": ObjectId(), "name": "Музеи и выставки"},
+      {"_id": ObjectId(), "name": "Культурные центры"},
+      {"_id": ObjectId(), "name": "Кино"},
+      {"_id": ObjectId(), "name": "Цирк"}
+    ]
+  },
+  {
+    "name": "Медицина",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Государственные лечебные учреждения"},
+      {"_id": ObjectId(), "name": "Аптеки и фармацевтика"},
+      {"_id": ObjectId(), "name": "Медицинские центры и клиники"},
+      {"_id": ObjectId(), "name": "Стоматология"},
+      {"_id": ObjectId(), "name": "Ветеринарная клиника"},
+      {"_id": ObjectId(), "name": "Оптика"},
+      {"_id": ObjectId(), "name": "Скорая помощь"},
+      {"_id": ObjectId(), "name": "Медицинские услуги"},
+      {"_id": ObjectId(), "name": "Медицинские товары, оборудование"}
+    ]
+  },
+  {
+    "name": "Образование",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Среднее специальное образование"},
+      {"_id": ObjectId(), "name": "Дополнительное образование"},
+      {"_id": ObjectId(), "name": "Научные организации"},
+      {"_id": ObjectId(), "name": "Высшее образование"},
+      {"_id": ObjectId(), "name": "Школы"},
+      {"_id": ObjectId(), "name": "Детские сады и развивающие центры"}
+    ]
+  },
+  {
+    "name": "Финансы",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Банк"},
+      {"_id": ObjectId(), "name": "Ломбарды и микрофинансирование"},
+      {"_id": ObjectId(), "name": "Обмен валюты"},
+      {"_id": ObjectId(), "name": "Страхование"},
+      {"_id": ObjectId(), "name": "Аудит, бухучет"},
+      {"_id": ObjectId(), "name": "Финансы"}
+    ]
+  },
+  {
+    "name": "Торговля",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Продукты питания"},
+      {"_id": ObjectId(), "name": "Универсальные магазины"},
+      {"_id": ObjectId(), "name": "Подарки, сувениры"},
+      {"_id": ObjectId(), "name": "Мебель"},
+      {"_id": ObjectId(), "name": "Техника, электроника"},
+      {"_id": ObjectId(), "name": "Предметы интерьера"},
+      {"_id": ObjectId(), "name": "Ткани, текстиль, матрасы"},
+      {"_id": ObjectId(), "name": "Строительный, хозяйственный магазин"},
+      {"_id": ObjectId(), "name": "Цветы, садоводство"},
+      {"_id": ObjectId(), "name": "Пункты выдачи"},
+      {"_id": ObjectId(), "name": "Косметика, парфюмерия"},
+      {"_id": ObjectId(), "name": "Спортивные товары"},
+      {"_id": ObjectId(), "name": "Рынок"},
+      {"_id": ObjectId(), "name": "Литература"},
+      {"_id": ObjectId(), "name": "Оптовая торговля"},
+      {"_id": ObjectId(), "name": "Информация"},
+      {"_id": ObjectId(), "name": "Строительный рынок, стройматериалы"},
+      {"_id": ObjectId(), "name": "Одежда, обувь, аксессуары"},
+      {"_id": ObjectId(), "name": "Домашние животные"},
+      {"_id": ObjectId(), "name": "Товары для детей"},
+      {"_id": ObjectId(), "name": "Ювелирные изделия"},
+      {"_id": ObjectId(), "name": "Вендинг"},
+      {"_id": ObjectId(), "name": "Товары для отдыха, туризма"},
+      {"_id": ObjectId(), "name": "Товары для офиса"},
+      {"_id": ObjectId(), "name": "Хобби"},
+      {"_id": ObjectId(), "name": "Хозтовары, бытовая химия, прочее"}
+    ]
+  },
+  {
+    "name": "Государство",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Органы власти"},
+      {"_id": ObjectId(), "name": "Коммунальные службы"},
+      {"_id": ObjectId(), "name": "Социальная сфера"},
+      {"_id": ObjectId(), "name": "Государственные учреждения"},
+      {"_id": ObjectId(), "name": "Правоохранительные органы и силовые структуры"},
+      {"_id": ObjectId(), "name": "ЗАГС, дворец бракосочетания"},
+      {"_id": ObjectId(), "name": "Посольство, консульство, визовый центр"},
+      {"_id": ObjectId(), "name": "Налоговая инспекция"},
+      {"_id": ObjectId(), "name": "Почта"},
+      {"_id": ObjectId(), "name": "Паспортная служба"},
+      {"_id": ObjectId(), "name": "Суд, прокуратура"},
+      {"_id": ObjectId(), "name": "Пожарные, спасательные службы"},
+      {"_id": ObjectId(), "name": "Госуслуги, служба одного окна"},
+      {"_id": ObjectId(), "name": "Военкомат, армия"},
+      {"_id": ObjectId(), "name": "Исправительное учреждение"},
+      {"_id": ObjectId(), "name": "Администрация"}
+   ]
+  },
+  {
+    "name": "Религия",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Церковь"},
+      {"_id": ObjectId(), "name": "Религия"},
+      {"_id": ObjectId(), "name": "Синагога"},
+      {"_id": ObjectId(), "name": "Мечеть"},
+      {"_id": ObjectId(), "name": "Пагода"}
+    ]
+  },
+  {
+    "name": "Еда",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Кафе, ресторан"},
+      {"_id": ObjectId(), "name": "Бар, пивная"},
+      {"_id": ObjectId(), "name": "Общественное питание, столовая"},
+      {"_id": ObjectId(), "name": "Быстрое питание"},
+      {"_id": ObjectId(), "name": "Кофейня, чайная"}
+    ]
+  },
+  {
+    "name": "Авто",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Транспорт, перевозки"},
+      {"_id": ObjectId(), "name": "Автошколы"},
+      {"_id": ObjectId(), "name": "Заправочные станции"},
+      {"_id": ObjectId(), "name": "Автосервис, услуги"},
+      {"_id": ObjectId(), "name": "Продажа авто"},
+      {"_id": ObjectId(), "name": "Запчасти, аксессуары"},
+      {"_id": ObjectId(), "name": "Шиномонтаж"},
+      {"_id": ObjectId(), "name": "ГИБДД, МРЭО"},
+      {"_id": ObjectId(), "name": "Автомойка"},
+      {"_id": ObjectId(), "name": "Гаражный кооператив"},
+      {"_id": ObjectId(), "name": "Штрафстоянка"},
+      {"_id": ObjectId(), "name": "Пункт техосмотра"}
+    ]
+  },
+  {
+    "name": "Спорт",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Спортивные сооружения"},
+      {"_id": ObjectId(), "name": "Спортивные клубы и базы"},
+      {"_id": ObjectId(), "name": "Фитнес и йога"},
+      {"_id": ObjectId(), "name": "Конный спорт"},
+      {"_id": ObjectId(), "name": "Автодром, мотодром"},
+      {"_id": ObjectId(), "name": "Водный спорт"},
+      {"_id": ObjectId(), "name": "Лыжный спорт"},
+      {"_id": ObjectId(), "name": "Спортивные развлечения"}
+    ]
+  },
+  {
+    "name": "Бизнес и услуги",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Реклама"},
+      {"_id": ObjectId(), "name": "Промышленное предприятие, завод"},
+      {"_id": ObjectId(), "name": "Организации, объединения, партии"},
+      {"_id": ObjectId(), "name": "Уход за внешностью"},
+      {"_id": ObjectId(), "name": "Ателье по пошиву и ремонту одежды"},
+      {"_id": ObjectId(), "name": "Юридические услуги"},
+      {"_id": ObjectId(), "name": "Деловые услуги"},
+      {"_id": ObjectId(), "name": "Оплата перевозок"},
+      {"_id": ObjectId(), "name": "Связь"},
+      {"_id": ObjectId(), "name": "Химчистка, прачечная"},
+      {"_id": ObjectId(), "name": "Фото, полиграфические услуги"},
+      {"_id": ObjectId(), "name": "Ритуальные услуги"},
+      {"_id": ObjectId(), "name": "Безопасность"},
+      {"_id": ObjectId(), "name": "Бытовые услуги"},
+      {"_id": ObjectId(), "name": "Дизайн"},
+      {"_id": ObjectId(), "name": "Интернет"},
+      {"_id": ObjectId(), "name": "Кадры, консалтинг"},
+      {"_id": ObjectId(), "name": "Организация праздников"},
+      {"_id": ObjectId(), "name": "ТВ, радио, печатное СМИ"},
+      {"_id": ObjectId(), "name": "Шоу-бизнес"},
+      {"_id": ObjectId(), "name": "Экспертиза, патентование"}
+    ]
+  },
+  {
+    "name": "Строительство и недвижимость",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Архитектура и проектирование"},
+      {"_id": ObjectId(), "name": "Инженерные системы"},
+      {"_id": ObjectId(), "name": "Недвижимость"},
+      {"_id": ObjectId(), "name": "Окна, двери, ограды"},
+      {"_id": ObjectId(), "name": "Отделочные материалы"},
+      {"_id": ObjectId(), "name": "Строительное оборудование и техника"},
+      {"_id": ObjectId(), "name": "Строительные магазины"},
+      {"_id": ObjectId(), "name": "Строительные услуги"},
+      {"_id": ObjectId(), "name": "Стройматериалы"}
+    ]
+  },
+  {
+    "name": "Производство и материалы",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Агропром, сельское хозяйство"},
+      {"_id": ObjectId(), "name": "Геофизика, геодезия, геология"},
+      {"_id": ObjectId(), "name": "Легкая промышленность"},
+      {"_id": ObjectId(), "name": "Лесная промышленность, деревообработка"},
+      {"_id": ObjectId(), "name": "Материалы, изделия, оборудование"},
+      {"_id": ObjectId(), "name": "Машиностроение"},
+      {"_id": ObjectId(), "name": "Металлургия"},
+      {"_id": ObjectId(), "name": "Оборудование для сферы услуг"},
+      {"_id": ObjectId(), "name": "Пищевая промышленность"},
+      {"_id": ObjectId(), "name": "Пищевое оборудование"},
+      {"_id": ObjectId(), "name": "Промышленное оборудование"},
+      {"_id": ObjectId(), "name": "Промышленные услуги"},
+      {"_id": ObjectId(), "name": "Тара и упаковка"},
+      {"_id": ObjectId(), "name": "Топливо и энергетика"},
+      {"_id": ObjectId(), "name": "Торговое и банковское оборудование"},
+      {"_id": ObjectId(), "name": "Химическая промышленность"},
+      {"_id": ObjectId(), "name": "Электроника и электротехника"},
+      {"_id": ObjectId(), "name": "Ювелирная промышленность"}
+    ]
+  },
+  {
+    "name": "Отдых и туризм",
+    "subCategories": [
+      {"_id": ObjectId(), "name": "Товары и услуги 18+"},
+      {"_id": ObjectId(), "name": "Гостиницы, жилье"},
+      {"_id": ObjectId(), "name": "Санаторий, дом отдыха"},
+      {"_id": ObjectId(), "name": "Детский лагерь отдыха"},
+      {"_id": ObjectId(), "name": "Зоопарк, дельфинарий"},
+      {"_id": ObjectId(), "name": "Прокат велосипедов, самокатов"},
+      {"_id": ObjectId(), "name": "Развлечения"},
+      {"_id": ObjectId(), "name": "Услуги туризма"},
+      {"_id": ObjectId(), "name": "Аквапарк"},
+      {"_id": ObjectId(), "name": "Ночной клуб"},
+      {"_id": ObjectId(), "name": "Баня, сауна"}
+    ]
+  }
+])
+
+// Check: db.Category.find()
