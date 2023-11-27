@@ -6,7 +6,7 @@ on:
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
@@ -17,12 +17,7 @@ jobs:
       with:
         node-version: '16'
 
-    - name: 🔨 Build frontend
-      run: |
-        cd frontend
-        npm ci
-        npm run build
-        mv ./dist/complaint/ ../build
+
 
     - name: 🔨 Build backend
       run: |
@@ -30,6 +25,13 @@ jobs:
         npm ci --force
         npm run build
         mv ./dist/ ../build
+
+    - name: 🔨 Build frontend
+      run: |
+        cd frontend
+        npm ci
+        npm run build
+        mv ./dist/complaint/ ../build
 
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
