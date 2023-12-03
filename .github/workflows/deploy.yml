@@ -46,6 +46,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          source /home/deviant/nodevenv/domains/complaint.${{ secrets.SSH_HOST }}/public_htm/16/bin/activate
-          cd /home/deviant/domains/complaint.${{ secrets.SSH_HOST }}/public_htm
+          echo 'ssh works'
+          source /home/deviant/nodevenv/domains/complaint.${{ secrets.SSH_HOST }}/public_html/16/bin/activate
+          cd /home/deviant/domains/complaint.${{ secrets.SSH_HOST }}/public_html
           pm2 reload complaint
