@@ -9,15 +9,12 @@ export const getMongoConfig = async(configService: ConfigService): Promise<Typeg
 }
 
 const getMongoString = (configService: ConfigService) =>
-  'mongodb://' +
-  configService.get('MONGO_LOGIN') +
-  ':' +
-  configService.get('MONGO_PASSWORD') +
-  '@' +
-  configService.get('MONGO_HOST') +
-  ':' +
-  configService.get('MONGO_PORT') +
-  '/' +
-  configService.get('MONGO_AUTHDATABASE'); // TODO: another name
+  `${configService.get('MONGO_PROTOCOL')}:` +
+  `//${configService.get('MONGO_LOGIN')}` +
+  `:${configService.get('MONGO_PASSWORD')}` +
+  `@${configService.get('MONGO_HOST')}` +
+  (configService.get('MONGO_PORT') ? `:${configService.get('MONGO_PORT')}` : '') +
+  `/${configService.get('MONGO_DATABASE')}` +
+  '?retryWrites=true&w=majority';
 
 const getMongoOptions = () => ({});

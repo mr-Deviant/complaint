@@ -53,6 +53,8 @@ jobs:
 #          cd /home/deviant/domains/complaint.${{ secrets.SSH_HOST }}/public_html
 #          pm2 reload complaint
 
+# Pseudo-terminal will not be allocated because stdin is not a terminal.
+# ssh: connect to host *** port 22: Operation timed out
     - name: Restart website
       uses: fifsky/ssh-action@master
       with:
