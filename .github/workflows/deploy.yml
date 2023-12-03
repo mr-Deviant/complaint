@@ -40,11 +40,12 @@ jobs:
         local-dir: ./build/
 
     - name: Restart website
-      uses: appleboy/ssh-action@v0.1.9
+      uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
+        # password: ${{ secrets.SSH_PASSWORD }}
+        key: ${{ secrets.SSH_KEY }}
         script: |
           echo 'ssh works'
           source /home/deviant/nodevenv/domains/complaint.${{ secrets.SSH_HOST }}/public_html/16/bin/activate
