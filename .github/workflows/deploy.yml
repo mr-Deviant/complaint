@@ -39,31 +39,16 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/
 
-# dial tcp 91.203.4.45:22: i/o timeout
+# After i login into DirectAdmin my ip is whitelisted for some time for ssh connections.
+# That's why this is not working
 #    - name: Restart website
 #      uses: appleboy/ssh-action@1.0.0
 #      with:
 #        host: ${{ secrets.SSH_HOST }}
 #        username: ${{ secrets.SSH_USERNAME }}
-#        # password: ${{ secrets.SSH_PASSWORD }}
 #        key: ${{ secrets.SSH_KEY }}
 #        passphrase: ${{ secrets.SSH_PASSPHRASE }}
 #        script: |
 #          source /home/deviant/nodevenv/domains/complaint.${{ secrets.SSH_HOST }}/public_html/16/bin/activate
 #          cd /home/deviant/domains/complaint.${{ secrets.SSH_HOST }}/public_html
 #          pm2 reload complaint
-
-# Pseudo-terminal will not be allocated because stdin is not a terminal.
-# ssh: connect to host *** port 22: Operation timed out
-    - name: Restart website
-      uses: fifsky/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        user: ${{ secrets.SSH_USERNAME }}
-        pass: ${{ secrets.SSH_PASSWORD }}
-        # key: ${{ secrets.SSH_KEY }}
-        # passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        command: |
-          source /home/deviant/nodevenv/domains/complaint.${{ secrets.SSH_HOST }}/public_html/16/bin/activate
-          cd /home/deviant/domains/complaint.${{ secrets.SSH_HOST }}/public_html
-          pm2 reload complaint
