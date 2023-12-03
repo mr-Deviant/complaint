@@ -38,3 +38,14 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/
+
+    - name: Restart website
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        script: |
+          source /home/deviant/nodevenv/domains/complaint.${{ secrets.SSH_HOST }}/public_htm/16/bin/activate
+          cd /home/deviant/domains/complaint.${{ secrets.SSH_HOST }}/public_htm
+          pm2 reload complaint

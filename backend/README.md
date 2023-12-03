@@ -1,3 +1,17 @@
+Create admin user in Mongo inside Docker
+1. docker exec -it mongo bash
+2. mongo
+3. use admin
+4. db.createUser({
+     user: "admin",
+     pwd: "admin",
+     roles: [
+       { role: "userAdminAnyDatabase", db: "admin" },
+       { role: "dbAdminAnyDatabase", db: "admin" },
+       { role: "readWriteAnyDatabase", db: "admin" }
+     ]
+   })
+
 TODO:
 - docker image
 nest g module person
