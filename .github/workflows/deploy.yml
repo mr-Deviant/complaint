@@ -46,7 +46,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         # password: ${{ secrets.SSH_PASSWORD }}
         key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        #passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           echo 'ssh works'
           source /home/deviant/nodevenv/domains/complaint.${{ secrets.SSH_HOST }}/public_html/16/bin/activate
