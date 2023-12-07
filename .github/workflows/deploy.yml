@@ -23,6 +23,7 @@ jobs:
         npm ci --force
         npm run build
         mv ./dist/ ../build
+        mv package.json package-lock.json ../build/
 
     - name: Build frontend
       run: |
@@ -51,4 +52,6 @@ jobs:
 #        script: |
 #          source /home/deviant/nodevenv/domains/complaint.${{ secrets.SSH_HOST }}/public_html/16/bin/activate
 #          cd /home/deviant/domains/complaint.${{ secrets.SSH_HOST }}/public_html
+#          npm ci --only=production --force
+#          rm package.json package-lock.json
 #          pm2 reload complaint
