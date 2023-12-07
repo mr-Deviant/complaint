@@ -21,7 +21,7 @@ import { join } from 'path';
       useFactory: getMongoConfig,
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'frontend'),
+      rootPath: join(__dirname, 'frontend'),
       exclude: ['/api/(.*)'],
     }),
     AuthModule,
