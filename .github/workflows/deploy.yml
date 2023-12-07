@@ -22,7 +22,8 @@ jobs:
         cd backend
         npm ci --force
         npm run build
-        mv ./dist/ package.json package-lock.json ../build
+        mv ./dist/ ../build
+        cp package.json package-lock.json ../build
 
     - name: Build frontend
       run: |
