@@ -6,7 +6,7 @@ export interface Person {
   patronymic: string;
   phones: string[];
   email: string;
-  site: string; // TODO: Instagram, facebook, vk,
+  sites: string[];
   countryId: number | null;
   cityName: string | null;
   categoryId: number | null;

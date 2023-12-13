@@ -16,9 +16,9 @@ export class AddComponent {
       label: 'Человек',
       path: './person',
     },
-    // {
-    //   label: 'Товар',
-    //   path: './product',
-    // },
+    {
+      label: 'Товар',
+      path: './product',
+    },
   ];
 }

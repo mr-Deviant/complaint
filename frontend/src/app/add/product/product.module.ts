@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FormModule } from '../../common/form.module';
-import { PersonRoutingModule } from './person-routing.module';
-import { PersonComponent } from './person.component';
+import { ProductRoutingModule } from './product-routing.module';
 import { SharedModule } from '../../common/shared.module';
+import { FormModule } from '../../common/form.module';
+import { ProductComponent } from './product.component';
 
 @NgModule({
   declarations: [
-    PersonComponent,
+    ProductComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormModule,
-    PersonRoutingModule,
+    ProductRoutingModule,
   ]
 })
-export class PersonModule {}
+export class ProductModule {}

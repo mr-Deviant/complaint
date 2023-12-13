@@ -1,64 +1,9 @@
-<form [formGroup]="addService.form" (ngSubmit)="addService.onSubmit(ComplaintType.Company)" autocomplete="off">
+<form [formGroup]="addService.form" (ngSubmit)="addService.onSubmit(ComplaintType.Product)" autocomplete="off">
   <div class="grid-row grid-3">
     <mat-form-field>
       <mat-label>Название</mat-label>
       <input matInput formControlName="name" autofocus />
     </mat-form-field>
-
-    <ng-container formArrayName="sites">
-      <mat-form-field *ngFor="let site of addService.sites.controls; let i = index; let last = last">
-        <mat-label>Сайт/Соц. сети</mat-label>
-        <input matInput [formControlName]="i" type="url" />
-        <button
-          *ngIf="last && addService.sites.controls.length < maxSitesNum"
-          matSuffix
-          mat-icon-button
-          (click)="addService.addSite()"
-          aria-label="Добавить сайт"
-        >
-          <mat-icon fontIcon="icon-add-circle"></mat-icon>
-        </button>
-        <button
-          *ngIf="(!last || addService.sites.controls.length === maxSitesNum) && addService.sites.controls.length > 1"
-          matSuffix
-          mat-icon-button
-          (click)="addService.removeSite(i)"
-          aria-label="Добавить сайт"
-        >
-          <mat-icon fontIcon="icon-cancel-circle"></mat-icon>
-        </button>
-      </mat-form-field>
-    </ng-container>
-
-    <mat-form-field>
-      <mat-label>E-mail</mat-label>
-      <input matInput formControlName="email" type="email" />
-    </mat-form-field>
-
-    <ng-container formArrayName="phones">
-      <mat-form-field *ngFor="let phone of addService.phones.controls; let i = index; let last = last">
-        <mat-label>Телефон</mat-label>
-        <input matInput [formControlName]="i" type="tel" />
-        <button
-          *ngIf="last && addService.phones.controls.length < maxPhonesNum"
-          matSuffix
-          mat-icon-button
-          (click)="addService.addPhone()"
-          aria-label="Добавить телефон"
-        >
-          <mat-icon fontIcon="icon-add-circle"></mat-icon>
-        </button>
-        <button
-          *ngIf="(!last || addService.phones.controls.length === maxPhonesNum) && addService.phones.controls.length > 1"
-          matSuffix
-          mat-icon-button
-          (click)="addService.removePhone(i)"
-          aria-label="Удалить телефон"
-        >
-          <mat-icon fontIcon="icon-cancel-circle"></mat-icon>
-        </button>
-      </mat-form-field>
-    </ng-container>
   </div>
 
   <div class="grid-row grid-3">
@@ -152,3 +97,4 @@
     <button mat-flat-button color="primary">Сохранить</button>
   </div>
 </form>
+

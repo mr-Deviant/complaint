@@ -3,14 +3,12 @@ import { ComplaintType } from 'src/app/enums/complaint-type';
 import { AddService } from '../add.service';
 
 @Component({
-  // selector: 'app-person',
-  templateUrl: './person.component.html',
-  styleUrls: ['./person.component.scss'],
+  // selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PersonComponent {
+export class ProductComponent {
   public addService = inject(AddService);
-  public readonly maxSitesNum = 5;
-  public readonly maxPhonesNum = 3;
   public ComplaintType = ComplaintType;
 }

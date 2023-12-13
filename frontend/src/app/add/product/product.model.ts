@@ -1,11 +1,5 @@
-export interface Company {
-  // userId: string;
-  // photos: string[];
-  // personsId: number[];
+export interface Product {
   name: string;
-  phones: string[];
-  email: string;
-  sites: string[];
   countryId: number | null;
   cityName: string | null;
   categoryId: number | null;

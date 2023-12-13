@@ -1,11 +1,11 @@
 export class CreateCompanyDto {
-  userId: string;
-  photos?: string[];
-  personsId?: string[];
+  // userId: string;
+  // photos?: string[];
+  // personsId?: string[];
   name?: string;
   phones?: string[];
   email?: string;
-  site?: string; // TODO: Instagram, facebook, vk,
+  sites?: string[];
   countryId: number;
   cityName?: string;
   categoryId: number;

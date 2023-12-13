@@ -24,7 +24,7 @@ export class CompanyModel {
   email?: string;
 
   @prop()
-  site?: string; // TODO: Instagram, facebook, vk,
+  sites?: string[];
 
   @prop()
   countryId: number;
