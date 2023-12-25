@@ -4,6 +4,6 @@ export interface CategoryModel {
 }
 
 export interface SubCategoryModel {
-  id: string;
+  _id: string;
   name: string;
 }

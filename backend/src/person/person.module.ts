@@ -10,7 +10,7 @@ import { PersonModel } from './person.model';
       {
         typegooseClass: PersonModel,
         schemaOptions: {
-          collection: 'Person'
+          collection: 'persons'
         }
       }
     ])

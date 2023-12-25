@@ -4,11 +4,18 @@ import { Observable } from 'rxjs';
 import { CompanyService } from './company/company.service';
 import { PersonService } from './person/person.service';
 import { ProductService } from './product/product.service';
-import { ComplaintType } from '../enums/complaint-type';
+import { ComplaintTypeEnum } from '../enums/complaint-type.enum';
 import { CategoryModel } from '../models/category.model';
 import { CountryModel } from '../models/country.model';
 import { CategoryService } from '../services/category.service';
 import { CountryService } from '../services/country.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CompanyModel } from './company/company.model';
+import { PersonModel } from './person/person.model';
+import { ProductModel } from './product/product.model';
+
+export type ComplaintServiceType = CompanyService | PersonService | ProductService;
+export type ComplaintModel = CompanyModel | PersonModel | ProductModel;
 
 @Injectable({
   providedIn: 'root',
@@ -20,18 +27,47 @@ export class AddService {
   private personService = inject(PersonService);
   private productService = inject(ProductService);
 
-  public form = new FormGroup({
-    name: new FormControl<string>('', { nonNullable: true }), // Company, Person, Product
-    surname: new FormControl<string>('', { nonNullable: true }), // Person
-    patronymic: new FormControl<string>('', { nonNullable: true }), // Person
+  // TODO: add maxlength to all fields
+  public form: FormGroup = new FormGroup({
+    // Company, Person, Product
+    name: new FormControl<string>('', {
+      validators: [Validators.maxLength(100)],
+      nonNullable: true,
+    }),
+    // Person
+    surname: new FormControl<string>({ value: '', disabled: true }, { nonNullable: true }),
+    // Person
+    patronymic: new FormControl<string>({ value: '', disabled: true }, { nonNullable: true }),
+    // Company, Person
     sites: new FormArray([new FormControl<string>('', { nonNullable: true })]),
+    // Company, Person
     email: new FormControl<string>('', { validators: [Validators.email], nonNullable: true }),
+    // Company, Person
     phones: new FormArray([new FormControl<string>('', { nonNullable: true })]),
-    countryId: new FormControl<number | null>(null, [Validators.required]),
-    cityName: new FormControl<string>(''),
-    categoryId: new FormControl<number | null>(null, [Validators.required]),
-    shortDescription: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
-    fullDescription: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
+    // Product
+    barCode: new FormControl<string>(
+      { value: '', disabled: true },
+      {
+        validators: [Validators.maxLength(48)],
+        nonNullable: true,
+      },
+    ),
+    // Company, Person, Product
+    countryId: new FormControl<string | null>(null, [Validators.required]),
+    // Company, Person, Product
+    cityName: new FormControl<string>('', { validators: [Validators.maxLength(100)], nonNullable: true }),
+    // Company, Person, Product
+    categoryId: new FormControl<string | null>(null, [Validators.required]),
+    // Company, Person, Product
+    shortDescription: new FormControl<string>('', {
+      validators: [Validators.required, Validators.maxLength(150)],
+      nonNullable: true,
+    }),
+    // Company, Person, Product
+    fullDescription: new FormControl<string>('', {
+      validators: [Validators.required, Validators.maxLength(2000)],
+      nonNullable: true,
+    }),
   });
 
   public categories$: Observable<CategoryModel[]>;
@@ -69,27 +105,46 @@ export class AddService {
     this.phones.removeAt(index);
   }
 
-  onSubmit(complaintType: ComplaintType): void {
-    let complainService: CompanyService | PersonService | ProductService = this.getComplaintService(complaintType);
+  onSubmit(complaintType: ComplaintTypeEnum): void {
+    const complaintServiceCreate = this.getComplaintServiceCreate(complaintType, this.form.value);
 
     if (this.form.valid) {
-      complainService.create(this.form.getRawValue()).subscribe(() => {
-        // TODO: reset forms in services and go to complaint
-      });
+      complaintServiceCreate.subscribe(
+        (result: ComplaintModel) => {
+          console.log('Form submit', result);
+          this.form.reset();
+          // TODO: redirect to jsut created complaint
+        },
+        (error: HttpErrorResponse) => {
+          console.error("Couln't save complaint on server", error);
+        },
+      );
       return;
     } else {
       this.form.markAllAsTouched();
     }
   }
 
-  private getComplaintService(complaintType: ComplaintType): CompanyService | PersonService | ProductService {
+  private getComplaintServiceCreate(complaintType: ComplaintTypeEnum, formValue: unknown): Observable<ComplaintModel> {
     switch (complaintType) {
-      case ComplaintType.Company:
-        return this.companyService;
-      case ComplaintType.Person:
-        return this.personService;
-      case ComplaintType.Product:
-        return this.productService;
+      case ComplaintTypeEnum.Company:
+        return this.companyService.create(formValue as CompanyModel);
+      case ComplaintTypeEnum.Person:
+        return this.personService.create(formValue as PersonModel);
+      case ComplaintTypeEnum.Product:
+        return this.productService.create(formValue as ProductModel);
     }
+  }
+
+  enableFields(...fields: string[]): void {
+    fields.forEach((field: string) => {
+      this.form.get(field)?.enable({ emitEvent: false });
+    });
+  }
+
+  disableFields(...fields: string[]): void {
+    fields.forEach((field: string) => {
+      this.form.get(field)?.disable({ emitEvent: false });
+    });
   }
 }

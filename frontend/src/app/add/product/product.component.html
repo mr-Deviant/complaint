@@ -1,8 +1,13 @@
-<form [formGroup]="addService.form" (ngSubmit)="addService.onSubmit(ComplaintType.Product)" autocomplete="off">
+<form [formGroup]="addService.form" (ngSubmit)="addService.onSubmit(ComplaintTypeEnum.Product)" autocomplete="off">
   <div class="grid-row grid-3">
     <mat-form-field>
       <mat-label>Название</mat-label>
-      <input matInput formControlName="name" autofocus />
+      <input matInput formControlName="name" maxlength="100" autofocus />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Штрих код</mat-label>
+      <input matInput type="number" formControlName="barCode" maxlength="48" />
     </mat-form-field>
   </div>
 
@@ -18,7 +23,6 @@
           autocomplete="off"
           #categoriesFilter
         />
-        <!-- <mat-option [value]="null">Не выбрано</mat-option>-->
         <ng-container *ngFor="let categoryGroup of addService.categories$ | async">
           <mat-optgroup
             *ngIf="
@@ -33,7 +37,7 @@
                   (categoryGroup.name | includes: categoriesFilter.value)
                   || (category.name | includes: categoriesFilter.value)
                 "
-                [value]="category.id"
+                [value]="category._id"
               >
                 {{ category.name }}
               </mat-option>
@@ -70,14 +74,14 @@
     <!-- TODO: make field with autocomplete -->
     <mat-form-field *ngIf="addService.form.get('countryId')?.value !== null">
       <mat-label>Город</mat-label>
-      <input matInput formControlName="cityName" />
+      <input matInput formControlName="cityName" maxlength="100" />
     </mat-form-field>
   </div>
 
   <div class="grid-row grid-1">
     <mat-form-field>
       <mat-label>Заголовок</mat-label>
-      <input matInput formControlName="shortDescription" type="text" />
+      <input matInput type="text" formControlName="shortDescription" maxlength="150" />
     </mat-form-field>
   </div>
 
@@ -89,7 +93,9 @@
         formControlName="fullDescription"
         cdkTextareaAutosize
         cdkAutosizeMinRows="5"
-        cdkAutosizeMaxRows="25"></textarea>
+        cdkAutosizeMaxRows="25"
+        maxlength="2000"
+      ></textarea>
     </mat-form-field>
   </div>
 

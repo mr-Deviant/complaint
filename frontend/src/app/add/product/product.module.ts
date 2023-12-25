@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductRoutingModule } from './product-routing.module';
-import { SharedModule } from '../../common/shared.module';
-import { FormModule } from '../../common/form.module';
+import { SharedModule } from '../../modules/shared.module';
+import { FormModule } from '../../modules/form.module';
 import { ProductComponent } from './product.component';
 
 @NgModule({

@@ -1,4 +1,4 @@
-<form [formGroup]="addService.form" (ngSubmit)="addService.onSubmit(ComplaintType.Person)" autocomplete="off">
+<form [formGroup]="addService.form" (ngSubmit)="addService.onSubmit(ComplaintTypeEnum.Person)" autocomplete="off">
   <div class="grid-row grid-3">
     <mat-form-field>
       <mat-label>Фамилия</mat-label>
@@ -14,8 +14,7 @@
       <mat-label>Отчество</mat-label>
       <input matInput formControlName="patronymic" />
     </mat-form-field>
-  </div>
-  <div class="grid-row grid-3">
+
     <ng-container formArrayName="sites">
       <mat-form-field *ngFor="let site of addService.sites.controls; let i = index; let last = last">
         <mat-label>Сайт/Соц. сети</mat-label>
@@ -45,11 +44,9 @@
       <mat-label>E-mail</mat-label>
       <input matInput formControlName="email" type="email" />
     </mat-form-field>
-  </div>
 
-  <div formArrayName="phones" class="grid-row grid-3">
-    <ng-container *ngFor="let phone of addService.phones.controls; let i = index; let last = last">
-      <mat-form-field>
+    <ng-container formArrayName="phones">
+      <mat-form-field *ngFor="let phone of addService.phones.controls; let i = index; let last = last">
         <mat-label>Телефон</mat-label>
         <input matInput [formControlName]="i" type="tel" />
         <button

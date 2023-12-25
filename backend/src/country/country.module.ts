@@ -11,7 +11,7 @@ import { CountryService } from './country.service';
       {
         typegooseClass: CountryModel,
         schemaOptions: {
-          collection: 'Country',
+          collection: 'countries',
         },
       },
     ]),

@@ -5,7 +5,7 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 
 import { AddRoutingModule } from './add-routing.module';
 import { AddComponent } from './add.component';
-import { FormModule } from '../common/form.module';
+import { FormModule } from '../modules/form.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

@@ -29,13 +29,13 @@ export class PersonModel {
   site?: string; // TODO: Instagram, facebook, vk,
 
   @prop()
-  countryId: number;
+  countryId: string;
 
   @prop()
   cityName?: string;
 
   @prop()
-  categoryId: number;
+  categoryId: string;
 
   @prop()
   shortDescription: string;

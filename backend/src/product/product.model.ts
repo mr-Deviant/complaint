@@ -1,31 +1,10 @@
 import { prop } from '@typegoose/typegoose';
-import { Base } from '@typegoose/typegoose/lib/defaultClasses';
+import { ComplaintModel } from '../common/complaint.model';
 
-export interface ProductModel extends Base {} // Add _id prop
-
-// TODO: extend common fields from common complaint
-export class ProductModel {
-  // @prop()
-  // userId: string;
-  //
-  // @prop({ type: () => [String] })
-  // photos?: string[];
-
+export class ProductModel extends ComplaintModel {
   @prop()
   name?: string;
 
   @prop()
-  countryId: number;
-
-  @prop()
-  cityName?: string;
-
-  @prop()
-  categoryId: number;
-
-  @prop()
-  shortDescription: string;
-
-  @prop()
-  fullDescription: string;
+  barCode?: string;
 }

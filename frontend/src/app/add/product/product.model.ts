@@ -1,8 +1,6 @@
-export interface Product {
+import { ComplaintModel } from '../../models/complaint.model';
+
+export interface ProductModel extends ComplaintModel {
   name: string;
-  countryId: number | null;
-  cityName: string | null;
-  categoryId: number | null;
-  shortDescription: string;
-  fullDescription: string;
+  barCode?: string;
 }

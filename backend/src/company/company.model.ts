@@ -27,13 +27,13 @@ export class CompanyModel {
   sites?: string[];
 
   @prop()
-  countryId: number;
+  countryId: string;
 
   @prop()
   cityName?: string;
 
   @prop()
-  categoryId: number;
+  categoryId: string;
 
   @prop()
   shortDescription: string;

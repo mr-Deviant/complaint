@@ -1,4 +1,4 @@
-<form [formGroup]="addService.form" (ngSubmit)="addService.onSubmit(ComplaintType.Company)" autocomplete="off">
+<form [formGroup]="addService.form" (ngSubmit)="addService.onSubmit(ComplaintTypeEnum.Company)" autocomplete="off">
   <div class="grid-row grid-3">
     <mat-form-field>
       <mat-label>Название</mat-label>
@@ -88,7 +88,7 @@
                   (categoryGroup.name | includes: categoriesFilter.value)
                   || (category.name | includes: categoriesFilter.value)
                 "
-                [value]="category.id"
+                [value]="category._id"
               >
                 {{ category.name }}
               </mat-option>

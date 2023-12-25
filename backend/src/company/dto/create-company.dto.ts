@@ -1,4 +1,4 @@
-export class CreateCompanyDto {
+export interface CreateCompanyDto {
   // userId: string;
   // photos?: string[];
   // personsId?: string[];

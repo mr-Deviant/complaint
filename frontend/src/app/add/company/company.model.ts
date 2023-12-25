@@ -1,4 +1,4 @@
-export interface Company {
+export interface CompanyModel {
   // userId: string;
   // photos: string[];
   // personsId: number[];
@@ -6,9 +6,9 @@ export interface Company {
   phones: string[];
   email: string;
   sites: string[];
-  countryId: number | null;
-  cityName: string | null;
-  categoryId: number | null;
+  countryId: string | null;
+  cityName: string;
+  categoryId: string | null;
   shortDescription: string;
   fullDescription: string;
 }

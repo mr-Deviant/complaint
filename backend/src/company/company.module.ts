@@ -11,7 +11,7 @@ import { CompanyService } from './company.service';
       {
         typegooseClass: CompanyModel,
         schemaOptions: {
-          collection: 'Company',
+          collection: 'companies',
         },
       },
     ]),

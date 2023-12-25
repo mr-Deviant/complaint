@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ComplaintType } from 'src/app/enums/complaint-type';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ComplaintTypeEnum } from 'src/app/enums/complaint-type.enum';
 import { AddService } from '../add.service';
 
 @Component({
@@ -8,7 +8,12 @@ import { AddService } from '../add.service';
   styleUrls: ['./product.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit {
   public addService = inject(AddService);
-  public ComplaintType = ComplaintType;
+  public ComplaintTypeEnum = ComplaintTypeEnum;
+
+  ngOnInit(): void {
+    this.addService.disableFields('surname', 'patronymic', 'sites', 'email', 'phones');
+    this.addService.enableFields('barCode');
+  }
 }

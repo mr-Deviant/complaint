@@ -1,17 +1,16 @@
-import {inject, Injectable} from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Person } from './person.model';
-import { ComplaintAddService } from '../../interfaces/complaint-add-service';
+import { PersonModel } from './person.model';
+import { ComplaintAddServiceInterface } from '../../interfaces/complaint-add-service.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PersonService implements ComplaintAddService<Person> {
+export class PersonService implements ComplaintAddServiceInterface<PersonModel> {
   private http = inject(HttpClient);
 
-  public create(data: Person): Observable<Person> {
-    return this.http.post<Person>('/api/person/create', data);
+  public create(data: PersonModel): Observable<PersonModel> {
+    return this.http.post<PersonModel>('/api/person/create', data);
   }
 }

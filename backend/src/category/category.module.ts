@@ -11,7 +11,7 @@ import { CategoryService } from './category.service';
       {
         typegooseClass: CategoryModel,
         schemaOptions: {
-          collection: 'Category',
+          collection: 'categories',
         },
       },
     ]),
