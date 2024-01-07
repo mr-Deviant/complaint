@@ -1,0 +1,20 @@
+-={{value}}=-
+<mat-form-field>
+  <mat-label>Страна</mat-label>
+  <mat-select [(ngModel)]="value" [disabled]="disabled">
+    <input
+      type="text"
+      [formControl]="filter"
+      class="dropdown-filter"
+      placeholder="Поиск"
+      autocomplete="off"
+      #countriesFilter
+    />
+    <ng-container *ngIf="countries$ | async | filter: countriesFilter.value:'name' as countries">
+      <mat-option *ngFor="let country of countries" [value]="country.code">
+        <div class="flag" [ngClass]="'flag-' + country.code"></div>{{ country.name }}
+      </mat-option>
+      <mat-option *ngIf="!countries.length" disabled>Ничего не найдено</mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>

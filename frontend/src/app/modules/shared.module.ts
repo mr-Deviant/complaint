@@ -5,19 +5,19 @@ import { IncludesPipe } from '../pipes/includes.pipe';
 
 @NgModule({
   declarations: [
-    FilterPipe,
-    IncludesPipe,
+    // FilterPipe,
+    // IncludesPipe,
   ],
   imports: [
     CommonModule,
   ],
   exports: [
-    FilterPipe,
-    IncludesPipe,
+    // FilterPipe,
+    // IncludesPipe,
   ],
   providers: [
-    FilterPipe,
-    IncludesPipe,
+    // FilterPipe,
+    // IncludesPipe,
   ]
 })
 export class SharedModule {}

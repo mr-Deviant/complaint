@@ -1,0 +1,165 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <mat-button-toggle-group formControlName="type" class="grid-row button-group" aria-label="Тип жалобы">
+    <mat-button-toggle [value]="ComplaintTypeEnum.Company">Компания</mat-button-toggle>
+    <mat-button-toggle [value]="ComplaintTypeEnum.Person">Человек</mat-button-toggle>
+    <mat-button-toggle [value]="ComplaintTypeEnum.Product">Товар</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div class="grid-row grid-3">
+    <mat-form-field *ngIf="form.controls['type'].value !== ComplaintTypeEnum.Person">
+      <mat-label>Название</mat-label>
+      <input matInput formControlName="name" type="text" maxlength="100" autofocus />
+    </mat-form-field>
+
+    <ng-container *ngIf="form.controls['type'].value === ComplaintTypeEnum.Person">
+      <mat-form-field>
+        <mat-label>Фамилия</mat-label>
+        <input matInput formControlName="surname" type="text" maxlength="100" autofocus />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Имя</mat-label>
+        <input matInput formControlName="name" type="text" maxlength="100" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Отчество</mat-label>
+        <input matInput formControlName="patronymic" type="text" maxlength="100" />
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container formArrayName="sites" *ngIf="form.controls['type'].value !== ComplaintTypeEnum.Product">
+      <mat-form-field *ngFor="let site of sites.controls; let i = index; let last = last">
+        <mat-label>Сайт/Соц. сети</mat-label>
+        <input matInput [formControlName]="i" type="url" maxlength="100" />
+        <button
+          *ngIf="last && sites.controls.length < maxSitesNum"
+          matSuffix
+          mat-icon-button
+          (click)="addSite()"
+          aria-label="Добавить сайт"
+        >
+          <mat-icon fontIcon="icon-add-circle"></mat-icon>
+        </button>
+        <button
+          *ngIf="(!last || sites.controls.length === maxSitesNum) && sites.controls.length > 1"
+          matSuffix
+          mat-icon-button
+          (click)="removeSite(i)"
+          aria-label="Добавить сайт"
+        >
+          <mat-icon fontIcon="icon-cancel-circle"></mat-icon>
+        </button>
+      </mat-form-field>
+    </ng-container>
+
+    <mat-form-field *ngIf="form.controls['type'].value !== ComplaintTypeEnum.Product">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" type="email" maxlength="100" />
+    </mat-form-field>
+
+    <ng-container formArrayName="phones" *ngIf="form.controls['type'].value !== ComplaintTypeEnum.Product">
+      <mat-form-field *ngFor="let phone of phones.controls; let i = index; let last = last">
+        <mat-label>Телефон</mat-label>
+        <input matInput [formControlName]="i" type="tel" maxlength="20" />
+        <button
+          *ngIf="last && phones.controls.length < maxPhonesNum"
+          matSuffix
+          mat-icon-button
+          (click)="addPhone()"
+          aria-label="Добавить телефон"
+        >
+          <mat-icon fontIcon="icon-add-circle"></mat-icon>
+        </button>
+        <button
+          *ngIf="(!last || phones.controls.length === maxPhonesNum) && phones.controls.length > 1"
+          matSuffix
+          mat-icon-button
+          (click)="removePhone(i)"
+          aria-label="Удалить телефон"
+        >
+          <mat-icon fontIcon="icon-cancel-circle"></mat-icon>
+        </button>
+      </mat-form-field>
+    </ng-container>
+
+    <mat-form-field *ngIf="form.controls['type'].value === ComplaintTypeEnum.Product">
+      <mat-label>Штрих код</mat-label>
+      <input matInput type="number" formControlName="barCode" maxlength="50" />
+    </mat-form-field>
+  </div>
+
+  <div class="grid-row grid-3">
+    <mat-form-field>
+      <mat-label>Категория</mat-label>
+      <mat-select formControlName="categoryId">
+        <input
+          type="text"
+          [formControl]="categoriesFilter"
+          class="dropdown-filter"
+          placeholder="Поиск"
+          autocomplete="off"
+          #categoriesFilterElement
+        />
+        <!-- <mat-option [value]="null">Не выбрано</mat-option>-->
+        <ng-container *ngFor="let categoryGroup of categories$ | async">
+          <mat-optgroup
+            *ngIf="
+              (categoryGroup.name | includes: categoriesFilterElement.value)
+              || (categoryGroup.subCategories | filter: categoriesFilterElement.value:'name').length
+            "
+            [label]="categoryGroup.name"
+          >
+            <ng-container *ngFor="let category of categoryGroup.subCategories">
+              <mat-option
+                *ngIf="
+                  (categoryGroup.name | includes: categoriesFilterElement.value)
+                  || (category.name | includes: categoriesFilterElement.value)
+                "
+                [value]="category._id"
+              >
+                {{ category.name }}
+              </mat-option>
+            </ng-container>
+          </mat-optgroup>
+        </ng-container>
+        <!--        TODO:-->
+        <!--        <mat-option *ngIf="!categories.length" disabled>Ничего не найдено</mat-option>-->
+      </mat-select>
+    </mat-form-field>
+
+    <app-country-select formControlName="countryId" [countries$]="countries$"></app-country-select>
+
+    -={{ form.get('countryId')?.value }}=-
+    <!-- TODO: make field with autocomplete -->
+    <mat-form-field *ngIf="form.get('countryId')?.value !== null">
+      <mat-label>Город</mat-label>
+      <input matInput formControlName="cityName" type="text" maxlength="100" />
+    </mat-form-field>
+  </div>
+
+  <div class="grid-row grid-1">
+    <mat-form-field>
+      <mat-label>Заголовок</mat-label>
+      <input matInput formControlName="shortDescription" type="text" maxlength="150" />
+    </mat-form-field>
+  </div>
+
+  <div class="grid-row grid-1">
+    <mat-form-field>
+      <mat-label>Описание</mat-label>
+      <textarea
+        matInput
+        formControlName="fullDescription"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="25"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="grid-row">
+    <button mat-flat-button color="primary">Сохранить</button>
+  </div>
+</form>
+
