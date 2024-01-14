@@ -1,0 +1,53 @@
+<mat-form-field [attr.aria-describedby]="describedBy" [attr.aria-labelledby]="parentFormField?.getLabelId()">
+  <mat-label>{{ label }}<span aria-hidden="true" class="mat-form-field-required-marker"> *</span></mat-label>
+  <mat-select
+    [(ngModel)]="value"
+    (selectionChange)="selectionChanged($event)"
+    [required]="required"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    (focusin)="onFocusIn($event)"
+    (focusout)="onFocusOut($event)"
+  >
+    <input
+      type="text"
+      [formControl]="filterControl"
+      class="dropdown-filter"
+      placeholder="Поиск"
+      autocomplete="off"
+      #filter
+    />
+    <ng-container *ngIf="items$ | async as items">
+<!--      <mat-option *ngIf="!required" [value]="null">Не выбрано</mat-option>-->
+
+      <ng-container *ngIf="!subItems">
+        <mat-option *ngFor="let item of items | filter: filter.value: bindLabel" [value]="item[bindValue]">
+          <div class="flag" [ngClass]="showFlag ? 'flag-' + item[bindValue] : ''"></div>{{ item[bindLabel] }}
+        </mat-option>
+      </ng-container>
+
+      <ng-container *ngIf="subItems">
+        <ng-container *ngFor="let item of items">
+          <mat-optgroup
+            *ngIf="
+              (item[bindLabel] | includes: filter.value) ||
+              (item[subItems] | filter: filter.value:bindLabel).length
+            "
+            [label]="item[bindLabel]"
+          >
+            <ng-container *ngFor="let subItem of item[subItems]">
+              <mat-option
+                *ngIf="(item[bindLabel] | includes: filter.value) || (subItem[bindLabel] | includes: filter.value)"
+                [value]="subItem[bindValue]"
+              >
+                {{ subItem[bindLabel] }}
+              </mat-option>
+            </ng-container>
+          </mat-optgroup>
+        </ng-container>
+      </ng-container>
+
+      <mat-option *ngIf="!items.length" disabled>Ничего не найдено</mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>

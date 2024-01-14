@@ -90,47 +90,21 @@
   </div>
 
   <div class="grid-row grid-3">
-    <mat-form-field>
-      <mat-label>Категория</mat-label>
-      <mat-select formControlName="categoryId">
-        <input
-          type="text"
-          [formControl]="categoriesFilter"
-          class="dropdown-filter"
-          placeholder="Поиск"
-          autocomplete="off"
-          #categoriesFilterElement
-        />
-        <!-- <mat-option [value]="null">Не выбрано</mat-option>-->
-        <ng-container *ngFor="let categoryGroup of categories$ | async">
-          <mat-optgroup
-            *ngIf="
-              (categoryGroup.name | includes: categoriesFilterElement.value)
-              || (categoryGroup.subCategories | filter: categoriesFilterElement.value:'name').length
-            "
-            [label]="categoryGroup.name"
-          >
-            <ng-container *ngFor="let category of categoryGroup.subCategories">
-              <mat-option
-                *ngIf="
-                  (categoryGroup.name | includes: categoriesFilterElement.value)
-                  || (category.name | includes: categoriesFilterElement.value)
-                "
-                [value]="category._id"
-              >
-                {{ category.name }}
-              </mat-option>
-            </ng-container>
-          </mat-optgroup>
-        </ng-container>
-        <!--        TODO:-->
-        <!--        <mat-option *ngIf="!categories.length" disabled>Ничего не найдено</mat-option>-->
-      </mat-select>
-    </mat-form-field>
+    <app-select-with-filter
+      formControlName="categoryId"
+      label="Категория"
+      [items$]="categories$"
+      subItems="subCategories"
+    ></app-select-with-filter>
 
-    <app-country-select formControlName="countryId" [countries$]="countries$"></app-country-select>
+    <app-select-with-filter
+      formControlName="countryId"
+      label="Страна"
+      [items$]="countries$"
+      bindValue="code"
+      [showFlag]="true"
+    ></app-select-with-filter>
 
-    -={{ form.get('countryId')?.value }}=-
     <!-- TODO: make field with autocomplete -->
     <mat-form-field *ngIf="form.get('countryId')?.value !== null">
       <mat-label>Город</mat-label>

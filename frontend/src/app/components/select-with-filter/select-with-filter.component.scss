@@ -1,10 +1,12 @@
 @import "../../../assets/styles/flags.css";
 
-::ng-deep {
+:host {
   .mat-form-field {
     width: 100%;
   }
+}
 
+::ng-deep {
   .cdk-overlay-container {
     .flag {
       margin-right: 8px;
