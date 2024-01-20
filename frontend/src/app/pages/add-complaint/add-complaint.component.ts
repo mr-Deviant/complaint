@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, takeUntil } from 'rxjs';
+import { map, Observable, takeUntil } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
 import { CountryService } from '../../services/country.service';
 import { CategoryModel } from '../../models/category.model';
@@ -10,6 +10,7 @@ import { ComplaintTypeEnum } from '../../enums/complaint-type.enum';
 import { AddComplaintService } from './add-complaint.service';
 import { BaseComponent } from '../../components/base.component';
 import { ComplaintType } from '../../types/complaint.type';
+import { CityModel } from 'src/app/models/city.model';
 
 @Component({
   // selector: 'app-add-complaint',
@@ -91,6 +92,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
 
   public categories$: Observable<CategoryModel[]>;
   public countries$: Observable<CountryModel[]>;
+  public cities$!: Observable<string[]>;
 
   // TODO: delete after moving to custom controls
   public categoriesFilter = new FormControl('');
@@ -111,6 +113,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleTypeChange();
+    this.handleCountryChange();
   }
 
   private handleTypeChange(): void {
@@ -132,6 +135,19 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
             this.enableFields('barCode');
             break;
         }
+      });
+  }
+
+  private handleCountryChange(): void {
+    this.form
+      .get('countryId')
+      ?.valueChanges.pipe(takeUntil(this.destroyed$))
+      .subscribe((countryCode: string): void => {
+        this.cities$ = this.countryService.readCitiesByCountry(countryCode).pipe(
+          map((cities: CityModel[]) => {
+            return cities.map((city: CityModel) => city.name);
+          })
+        );
       });
   }
 

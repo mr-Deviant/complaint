@@ -14,12 +14,16 @@
 
     .dropdown-filter {
       position: sticky;
-      height: 42px;
+      background-color: #fff;
+
       border: none;
       border-bottom: 1px solid #000;
+      height: 42px;
       outline: none;
       padding: 0 16px;
+      top: 0;
       width: 100%;
+      z-index: 1;
     }
   }
 }

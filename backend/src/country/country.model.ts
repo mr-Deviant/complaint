@@ -5,8 +5,8 @@ export class CountryModel {
   code: string;
 
   @prop()
-  nameRu: string;
+  name: string;
 
-  // @prop()
-  // phoneCode: string;
+  @prop()
+  phoneCode: string;
 }

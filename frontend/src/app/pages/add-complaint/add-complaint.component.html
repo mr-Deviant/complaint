@@ -105,10 +105,14 @@
       [showFlag]="true"
     ></app-select-with-filter>
 
-    <!-- TODO: make field with autocomplete -->
     <mat-form-field *ngIf="form.get('countryId')?.value !== null">
       <mat-label>Город</mat-label>
-      <input matInput formControlName="cityName" type="text" maxlength="100" />
+      <input matInput formControlName="cityName" type="text" maxlength="100" [matAutocomplete]="citiesAutocomplete" #city />
+      <mat-autocomplete #citiesAutocomplete="matAutocomplete">
+        <mat-option *ngFor="let city of cities$ | async | filter: city.value" [value]="city">
+          {{ city }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
   </div>
 
