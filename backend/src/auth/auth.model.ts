@@ -4,9 +4,6 @@ import { prop } from '@typegoose/typegoose';
 export interface AuthModel extends Base {} // Add _id prop
 
 export class AuthModel extends TimeStamps {
-  @prop({ unique: true }) // Index also will be created
-  email: string;
-
-  @prop()
-  passwordHash: string;
+  @prop({ unique: true }) email: string; // Index also will be created
+  @prop() passwordHash: string;
 }

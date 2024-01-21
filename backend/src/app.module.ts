@@ -4,9 +4,7 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { getMongoConfig } from './configs/mongo.config';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
-import { CompanyModule } from './company/company.module';
-import { PersonModule } from './person/person.module';
-import { ProductModule } from './product/product.module';
+import { ComplaintModule } from './complaint/complaint.module';
 import { CategoryModule } from './category/category.module';
 import { CountryModule } from './country/country.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -25,9 +23,7 @@ import { join } from 'path';
       exclude: ['/api/(.*)'],
     }),
     AuthModule,
-    CompanyModule,
-    PersonModule,
-    ProductModule,
+    ComplaintModule,
     CategoryModule,
     CountryModule,
   ],

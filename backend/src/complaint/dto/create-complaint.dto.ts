@@ -1,4 +1,4 @@
-export interface CreateCompanyDto {
+export interface CreateComplaintDto {
   // userId: string;
   // photos?: string[];
   // personsId?: string[];
