@@ -1,0 +1,53 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .search-container {
+    align-items: center;
+    display: flex;
+    flex: 0;
+    flex-basis: 50%;
+  }
+
+  .search {
+    display: flex;
+    width: 100%;
+
+    &__input {
+      flex: 1;
+    }
+
+    &__button {
+      flex: 0;
+      margin: 0.25em 0 calc(1.34375em + 0.25em) 10px;
+      min-width: unset;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  .categories-container {
+    flex: 1;
+    flex-basis: 50%;
+  }
+
+  .categories {
+    display: flex;
+    list-style-type: none;
+    padding-left: 0;
+
+    &--sub {
+      flex-direction: column;
+      padding-left: 15px;
+    }
+
+    &__item {
+      flex: 1 1 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}

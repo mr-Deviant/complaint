@@ -6,8 +6,9 @@ export interface CreateComplaintDto {
   phones?: string[];
   email?: string;
   sites?: string[];
-  countryId: number;
-  cityName?: string;
+  countryCode: string;
+  cityName?: string; // For frontend
+  cityId?: string; // For backend
   categoryId: number;
   shortDescription: string;
   fullDescription: string;

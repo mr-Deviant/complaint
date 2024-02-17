@@ -1,12 +1,16 @@
 import { prop } from '@typegoose/typegoose';
+import { Base } from '@typegoose/typegoose/lib/defaultClasses';
+
+export interface ComplaintModel extends Base {} // Add _id prop
 
 export class ComplaintModel {
   // @prop() userId: string | null;
   // @prop() photoUrls?: string[]];
   @prop() name?: string;
   @prop() categoryId: string;
-  @prop() countryId: string;
-  @prop() cityName?: string;
+  @prop() countryCode: string;
+  @prop() cityName?: string; // For frontend
+  @prop() cityId?: string; // For backend
   @prop() shortDescription: string;
   @prop() fullDescription: string;
   // Company

@@ -7,7 +7,7 @@ import { CountryService } from '../../services/country.service';
 import { CategoryModel } from '../../models/category.model';
 import { CountryModel } from '../../models/country.model';
 import { ComplaintTypeEnum } from '../../enums/complaint-type.enum';
-import { AddComplaintService } from './add-complaint.service';
+import { ComplaintService } from '../../services/complaint.service';
 import { BaseComponent } from '../../components/base.component';
 import { ComplaintType } from '../../types/complaint.type';
 import { CityModel } from 'src/app/models/city.model';
@@ -19,7 +19,7 @@ import { CityModel } from 'src/app/models/city.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddComplaintComponent extends BaseComponent implements OnInit {
-  private addComplaintService = inject(AddComplaintService);
+  private complaintService = inject(ComplaintService);
   private categoryService = inject(CategoryService);
   private countryService = inject(CountryService);
 
@@ -70,7 +70,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
       },
     ),
     // Company, Person, Product
-    countryId: new FormControl<string | null>(null, [Validators.required]),
+    countryCode: new FormControl<string | null>(null, [Validators.required]),
     // Company, Person, Product
     cityName: new FormControl<string>('', {
       validators: [Validators.maxLength(100)],
@@ -140,7 +140,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
 
   private handleCountryChange(): void {
     this.form
-      .get('countryId')
+      .get('countryCode')
       ?.valueChanges.pipe(takeUntil(this.destroyed$))
       .subscribe((countryCode: string): void => {
         this.cities$ = this.countryService.readCitiesByCountry(countryCode).pipe(
@@ -169,7 +169,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.addComplaintService.create(this.form.value).subscribe(
+      this.complaintService.create(this.form.value).subscribe(
         (result: ComplaintType) => {
           console.log('Form submit', result);
           this.form.reset();

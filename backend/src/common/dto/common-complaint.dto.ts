@@ -3,7 +3,7 @@ export interface CommonComplaintDto {
   // photoUrls?: string[];
   name?: string;
   categoryId: string;
-  countryId: string;
+  countryCode: string;
   cityName?: string;
   shortDescription: string;
   fullDescription: string;

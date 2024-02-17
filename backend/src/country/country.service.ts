@@ -19,4 +19,24 @@ export class CountryService {
     return this.countryModel.findOne({ code: countryCode }, { cities: 1 })
       .distinct('cities');
   }
+
+  async findCityOrCreate(countryCode: string, cityName: string): Promise<string> {
+    cityName = cityName.trim();
+
+    const cityId = await this.countryModel
+      .find({ code: countryCode, cities: { $in: [cityName] } })
+      .limit(1)
+      .exec();
+
+    console.log('test', cityId);
+
+    if (!cityId) {
+      this.countryModel.updateOne(
+        { code: countryCode, cities: { $in: [cityName] } },
+        { $push: { cities: { _id: '123'/*ObjectId()*/, name: cityName, url: 'XXX' } } }
+      )
+    }
+
+    return '123';
+  }
 }

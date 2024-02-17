@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ComplaintService } from '../../services/complaint.service';
 
 @Component({
   // selector: 'app-home',
@@ -7,10 +8,12 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
+  private complaintService = inject(ComplaintService);
 
-  constructor() { }
+  public complaints$ = this.complaintService.getComplaints();
+  public lastComplaints$ = this.complaintService.getLast(3);
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
+  ngOnInit(): void {}
 }

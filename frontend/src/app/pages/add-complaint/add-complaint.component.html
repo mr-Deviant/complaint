@@ -98,14 +98,14 @@
     ></app-select-with-filter>
 
     <app-select-with-filter
-      formControlName="countryId"
+      formControlName="countryCode"
       label="Страна"
       [items$]="countries$"
       bindValue="code"
       [showFlag]="true"
     ></app-select-with-filter>
 
-    <mat-form-field *ngIf="form.get('countryId')?.value !== null">
+    <mat-form-field *ngIf="form.get('countryCode')?.value !== null">
       <mat-label>Город</mat-label>
       <input matInput formControlName="cityName" type="text" maxlength="100" [matAutocomplete]="citiesAutocomplete" #city />
       <mat-autocomplete #citiesAutocomplete="matAutocomplete">

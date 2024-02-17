@@ -3,6 +3,7 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { ComplaintController } from './complaint.controller';
 import { ComplaintModel } from './complaint.model';
 import { ComplaintService } from './complaint.service';
+import { CountryModule } from '../country/country.module';
 
 @Module({
   controllers: [ComplaintController],
@@ -15,6 +16,7 @@ import { ComplaintService } from './complaint.service';
         },
       },
     ]),
+    CountryModule,
   ],
   providers: [ComplaintService],
 })

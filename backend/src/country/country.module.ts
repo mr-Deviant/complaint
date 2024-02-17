@@ -17,5 +17,6 @@ import { CountryService } from './country.service';
     ]),
   ],
   providers: [CountryService],
+  exports: [CountryService],
 })
 export class CountryModule {}
