@@ -1,6 +1,6 @@
-import { ComplaintTypeEnum } from '../enums/complaint-type.enum';
+import { ComplaintTypeEnum } from '../../complaint/complaint-type.enum';
 
-export interface CommonComplaintModel {
+export interface CommonComplaintDto {
   _id?: string;
   type: ComplaintTypeEnum;
   // userId: string | null;
@@ -8,7 +8,8 @@ export interface CommonComplaintModel {
   name: string;
   categoryId: string;
   countryCode: string;
-  cityName: string; // On back should be saved cityId
+  cityId: string; // Saved on backend
+  cityName: string; // Frontend sends
   shortDescription: string;
   fullDescription: string;
 }

@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'add',
         loadChildren: () => import('../add-complaint/add-complaint.module').then(m => m.AddComplaintModule),
       },
+      {
+        path: ':id',
+        loadComponent: () => import('../view-complaint/view-complaint.component').then(m => m.ViewComplaintComponent),
+      },
     ],
   },
 ];

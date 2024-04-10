@@ -10,11 +10,15 @@ export class ComplaintService {
   private http = inject(HttpClient);
 
   public create(data: ComplaintType): Observable<ComplaintType> {
-    return this.http.post<ComplaintType>('/api/complaint/create', data);
+    return this.http.post<ComplaintType>('/api/complaint', data);
   }
 
   public getComplaints(): Observable<any> { // TODO: any
     return this.http.get<any>('/api/complaint/');
+  }
+
+  public getComplaint(id: string | null): Observable<ComplaintType> {
+    return this.http.get<ComplaintType>(`/api/complaint/${id}`);
   }
 
   public getLast(limit: number = 3): Observable<ComplaintType[]> {

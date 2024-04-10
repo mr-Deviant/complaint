@@ -39,7 +39,7 @@
   <div style="display: flex">
     <div *ngFor="let complaint of lastComplaints$ | async" style="flex: 1 1 0;">
       ({{ complaint.countryCode }}, {{ complaint.cityName }}, {{ complaint.categoryId }})
-      <h3><a routerLink="">{{ complaint.shortDescription }}</a></h3>
+      <h3><a [routerLink]="['/', complaint._id]">{{ complaint.shortDescription }}</a></h3>
       <p>{{ complaint.fullDescription }}</p>
     </div>
   </div>

@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { ComplaintModel } from './complaint.model';
 import { DocumentType, ModelType } from '@typegoose/typegoose/lib/types';
 import { InjectModel } from 'nestjs-typegoose';
-import { CreateComplaintDto } from './dto/create-complaint.dto';
+import { ComplaintDto } from './dto/complaint.dto';
 import { Types } from 'mongoose';
-import { CountryModel } from '../country/country.model';
+
 
 @Injectable()
 export class ComplaintService {
@@ -12,7 +12,7 @@ export class ComplaintService {
     @InjectModel(ComplaintModel) private readonly complaintModel: ModelType<ComplaintModel>,
   ) {}
 
-  async create(dto: CreateComplaintDto): Promise<DocumentType<ComplaintModel>> {
+  async create(dto: ComplaintDto): Promise<DocumentType<ComplaintModel>> {
     // Check if such city exists, and if no, insert it
 
     return this.complaintModel.create(dto);
@@ -33,12 +33,8 @@ export class ComplaintService {
   //   return this.complaintModel.deleteMany({id: new types.ObjectId(id)}).exec();
   // }
 
-  async findByComplaintId(
-    complaintId: string,
-  ): Promise<DocumentType<ComplaintModel>[]> {
-    return this.complaintModel
-      .find({ complaintId: new Types.ObjectId(complaintId) })
-      .exec();
+  async findByComplaintId(complaintId: string): Promise<DocumentType<ComplaintModel> | null> {
+    return this.complaintModel.findOne({ _id: complaintId }).exec();
   }
 
   async findLast(limit: number): Promise<DocumentType<ComplaintModel>[]> {

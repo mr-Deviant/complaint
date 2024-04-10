@@ -1,18 +1,7 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  HttpException,
-  HttpStatus,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
-import { CreateComplaintDto } from './dto/create-complaint.dto';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { ComplaintDto } from './dto/complaint.dto';
 import { ComplaintService } from './complaint.service';
 import { COMPLAINT_NOT_FOUND } from './complaint.constants';
-import { ComplaintType } from './complaint.type';
 import { CountryService } from '../country/country.service';
 
 @Controller('complaint')
@@ -22,8 +11,7 @@ export class ComplaintController {
     private readonly countryService: CountryService,
   ) {}
 
-  @Post('create')
-  async create(@Body() dto: CreateComplaintDto) {
+  @Post() async create(@Body() dto: ComplaintDto) {
     dto = {
       ...dto,
       cityId: dto.cityName ? await this.countryService.findCityOrCreate(dto.countryCode, dto.cityName) : '',
@@ -32,13 +20,12 @@ export class ComplaintController {
     return this.complaintService.create(dto);
   }
 
-  @Get(':id')
-  async get(@Param('id') id: string) {
+  @Get(':id') async get(@Param('id') id: string) {
     return this.complaintService.findByComplaintId(id);
   }
 
   @Patch(':id')
-  async patch(@Param('id') id: string, @Body() dto: ComplaintType) {
+  async patch(@Param('id') id: string, @Body() dto: ComplaintDto) {
     // TODO:
   }
 

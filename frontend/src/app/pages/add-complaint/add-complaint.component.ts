@@ -11,6 +11,7 @@ import { ComplaintService } from '../../services/complaint.service';
 import { BaseComponent } from '../../components/base.component';
 import { ComplaintType } from '../../types/complaint.type';
 import { CityModel } from 'src/app/models/city.model';
+import { Router } from '@angular/router';
 
 @Component({
   // selector: 'app-add-complaint',
@@ -19,6 +20,7 @@ import { CityModel } from 'src/app/models/city.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddComplaintComponent extends BaseComponent implements OnInit {
+  private router = inject(Router);
   private complaintService = inject(ComplaintService);
   private categoryService = inject(CategoryService);
   private countryService = inject(CountryService);
@@ -28,7 +30,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
 
   public ComplaintTypeEnum = ComplaintTypeEnum;
 
-  public form: FormGroup = new FormGroup({
+  public form = new FormGroup({
     // Company, Person, Product
     type: new FormControl<ComplaintTypeEnum>(ComplaintTypeEnum.Company),
     // Company, Person, Product
@@ -37,12 +39,12 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
       nonNullable: true,
     }),
     // Person
-    surname: new FormControl<string>({ value: '', disabled: true }, {
+    surname: new FormControl<string | undefined>({ value: '', disabled: true }, {
       validators: [Validators.maxLength(100)],
       nonNullable: true,
     }),
     // Person
-    patronymic: new FormControl<string>({ value: '', disabled: true }, {
+    patronymic: new FormControl<string | undefined>({ value: '', disabled: true }, {
       validators: [Validators.maxLength(100)],
       nonNullable: true,
     }),
@@ -94,9 +96,6 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
   public countries$: Observable<CountryModel[]>;
   public cities$!: Observable<string[]>;
 
-  // TODO: delete after moving to custom controls
-  public categoriesFilter = new FormControl('');
-
   get sites(): FormArray {
     return this.form.get('sites') as FormArray;
   }
@@ -120,7 +119,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
     this.form
       .get('type')
       ?.valueChanges.pipe(takeUntil(this.destroyed$))
-      .subscribe((type: ComplaintTypeEnum) => {
+      .subscribe((type: Partial<ComplaintTypeEnum | null>) => {
         switch (type) {
           case ComplaintTypeEnum.Company:
             this.disableFields('surname', 'patronymic', 'barCode');
@@ -142,12 +141,14 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
     this.form
       .get('countryCode')
       ?.valueChanges.pipe(takeUntil(this.destroyed$))
-      .subscribe((countryCode: string): void => {
-        this.cities$ = this.countryService.readCitiesByCountry(countryCode).pipe(
-          map((cities: CityModel[]) => {
-            return cities.map((city: CityModel) => city.name);
-          })
-        );
+      .subscribe((countryCode: Partial<string | null>): void => {
+        if (countryCode) {
+          this.cities$ = this.countryService.readCitiesByCountry(countryCode).pipe(
+            map((cities: CityModel[]) => {
+              return cities.map((city: CityModel) => city.name);
+            })
+          );
+        }
       });
   }
 
@@ -169,11 +170,11 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.complaintService.create(this.form.value).subscribe(
-        (result: ComplaintType) => {
-          console.log('Form submit', result);
+      this.complaintService.create(this.form.value as ComplaintType).subscribe(
+        (complaint: ComplaintType) => {
+          console.log('Form submit', complaint);
           this.form.reset();
-          // TODO: redirect to just created complaint
+          this.router.navigate(['/', complaint._id]);
         },
         (error: HttpErrorResponse) => {
           console.error("Couln't save complaint on server", error);

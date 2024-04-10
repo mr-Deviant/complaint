@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CountryModel } from '../models/country.model';
@@ -8,7 +8,7 @@ import { CityModel } from '../models/city.model';
   providedIn: 'root',
 })
 export class CountryService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   public readAll(): Observable<CountryModel[]> {
     return this.http.get<CountryModel[]>('/api/country');
