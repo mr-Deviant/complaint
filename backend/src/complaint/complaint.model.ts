@@ -6,12 +6,15 @@ export interface ComplaintModel extends Base {} // Add _id prop
 
 export class ComplaintModel {
   @prop() type: ComplaintTypeEnum;
-  // @prop() userId: string | null;
+  @prop() userId: string | null;
+  @prop() addedDate: Date;
   // @prop() photoUrls?: string[]];
   @prop() name: string;
   @prop() categoryId: string;
+  @prop() countryId: string;
   @prop() countryCode: string;
-  @prop() cityId: string; // Front sends cityName
+  @prop() cityId: string;
+  @prop() cityName: string;
   @prop() shortDescription: string;
   @prop() fullDescription: string;
   // Company, Person

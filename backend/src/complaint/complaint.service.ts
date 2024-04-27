@@ -41,4 +41,11 @@ export class ComplaintService {
     // TODO: isActive: true
     return this.complaintModel.find({}).sort({ _id: -1 }).limit(limit).exec();
   }
+
+  prepareCityName(cityName: string): string {
+    return cityName.replace(/[^ \-]+/g, (word: string) => {
+      // Capitalize each world
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    });
+  }
 }
