@@ -14,42 +14,40 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
-  declarations: [
-    SelectWithFilterComponent,
-    FilterPipe,
-    IncludesPipe,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    MatSelectModule,
-    MatOptionModule,
-  ],
-  exports: [
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    MatSelectModule,
-    MatOptionModule,
-    SelectWithFilterComponent,
-    FilterPipe,
-    IncludesPipe,
-  ],
-  providers: [
-    FilterPipe,
-    IncludesPipe,
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatOptionModule,
+        SelectWithFilterComponent,
+        FilterPipe,
+        IncludesPipe,
+    ],
+    exports: [
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatOptionModule,
+        SelectWithFilterComponent,
+        FilterPipe,
+        IncludesPipe,
+    ],
+    providers: [
+        FilterPipe,
+        IncludesPipe,
+    ]
 })
 export class FormModule {}

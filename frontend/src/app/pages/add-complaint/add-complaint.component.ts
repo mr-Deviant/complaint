@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { map, Observable, takeUntil } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
 import { CountryService } from '../../services/country.service';
@@ -12,12 +12,46 @@ import { BaseComponent } from '../../components/base.component';
 import { ComplaintType } from '../../types/complaint.type';
 import { CityModel } from 'src/app/models/city.model';
 import { Router } from '@angular/router';
+import { FilterPipe } from '../../pipes/filter.pipe';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MatOption } from '@angular/material/core';
+import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
+import { SelectWithFilterComponent } from '../../components/select-with-filter/select-with-filter.component';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
 
 @Component({
-  // selector: 'app-add-complaint',
-  templateUrl: './add-complaint.component.html',
-  styleUrls: ['./add-complaint.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    // selector: 'app-add-complaint',
+    templateUrl: './add-complaint.component.html',
+    styleUrls: ['./add-complaint.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonToggleGroup,
+        MatButtonToggle,
+        NgIf,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        NgFor,
+        MatIconButton,
+        MatSuffix,
+        MatIcon,
+        SelectWithFilterComponent,
+        MatAutocompleteTrigger,
+        MatAutocomplete,
+        MatOption,
+        CdkTextareaAutosize,
+        MatButton,
+        AsyncPipe,
+        FilterPipe,
+    ],
 })
 export class AddComplaintComponent extends BaseComponent implements OnInit {
   private router = inject(Router);

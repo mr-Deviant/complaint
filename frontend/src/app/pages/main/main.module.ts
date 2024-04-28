@@ -7,13 +7,11 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 
 @NgModule({
-  declarations: [
-    MainComponent,
-  ],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MainRoutingModule,
-  ],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MainRoutingModule,
+        MainComponent,
+    ],
 })
 export class MainModule {}

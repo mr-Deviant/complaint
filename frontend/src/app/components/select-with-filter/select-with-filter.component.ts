@@ -10,25 +10,39 @@ import {
   Optional,
   Self,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  FormGroupDirective,
-  NgControl,
-  NgForm,
-} from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroupDirective, NgControl, NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { MatFormField, MatFormFieldControl } from '@angular/material/form-field';
+import { MatFormField, MatFormFieldControl, MatLabel } from '@angular/material/form-field';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { MatSelectChange } from '@angular/material/select';
+import { MatSelectChange, MatSelect } from '@angular/material/select';
+import { IncludesPipe } from '../../pipes/includes.pipe';
+import { FilterPipe } from '../../pipes/filter.pipe';
+import { MatOption, MatOptgroup } from '@angular/material/core';
+import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-select-with-filter',
-  templateUrl: './select-with-filter.component.html',
-  styleUrls: ['./select-with-filter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: MatFormFieldControl, useExisting: SelectWithFilterComponent }],
+    selector: 'app-select-with-filter',
+    templateUrl: './select-with-filter.component.html',
+    styleUrls: ['./select-with-filter.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: MatFormFieldControl, useExisting: SelectWithFilterComponent }],
+    standalone: true,
+    imports: [
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        FormsModule,
+        ReactiveFormsModule,
+        NgIf,
+        NgFor,
+        MatOption,
+        NgClass,
+        MatOptgroup,
+        AsyncPipe,
+        FilterPipe,
+        IncludesPipe,
+    ],
 })
 // https://material.angular.io/guide/creating-a-custom-form-field-control
 export class SelectWithFilterComponent

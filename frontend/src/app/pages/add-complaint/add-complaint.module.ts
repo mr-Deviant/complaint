@@ -6,12 +6,12 @@ import { AddComplaintRoutingModule } from './add-complaint-routing.module';
 import { AddComplaintComponent } from './add-complaint.component';
 
 @NgModule({
-  declarations: [AddComplaintComponent],
-  imports: [
-    CommonModule,
-    FormModule,
-    MatIconModule,
-    AddComplaintRoutingModule,
-  ],
+    imports: [
+        CommonModule,
+        FormModule,
+        MatIconModule,
+        AddComplaintRoutingModule,
+        AddComplaintComponent,
+    ],
 })
 export class AddComplaintModule {}
