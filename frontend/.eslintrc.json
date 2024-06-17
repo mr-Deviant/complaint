@@ -33,8 +33,7 @@
           {
             "type": "element",
             "prefix": "app",
-            "style": "kebab-case",
-            "endOfLine": "auto"
+            "style": "kebab-case"
           }
         ]
       }
