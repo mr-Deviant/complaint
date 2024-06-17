@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { City } from './country.schema';
 import { CountryService } from './country.service';
-import { CityModel } from './city.model';
 
 @Controller('country')
 export class CountryController {
@@ -12,7 +12,7 @@ export class CountryController {
   }
 
   @Get(':countryCode/city')
-  async getCitiesByCountry(@Param() params: { countryCode: string }): Promise<CityModel[]> {
+  async getCitiesByCountry(@Param() params: { countryCode: string }): Promise<City[]> {
     return this.countryService.findCities(params.countryCode);
   }
 }

@@ -1,24 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { ComplaintModel } from './complaint.model';
-import { DocumentType, ModelType } from '@typegoose/typegoose/lib/types';
-import { InjectModel } from 'nestjs-typegoose';
+import { Complaint } from './complaint.schema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 import { ComplaintDto } from './dto/complaint.dto';
-import { Types } from 'mongoose';
-
 
 @Injectable()
 export class ComplaintService {
-  constructor(
-    @InjectModel(ComplaintModel) private readonly complaintModel: ModelType<ComplaintModel>,
-  ) {}
+  constructor(@InjectModel(Complaint.name) private readonly complaintModel: Model<Complaint>) {}
 
-  async create(dto: ComplaintDto): Promise<DocumentType<ComplaintModel>> {
+  async create(dto: ComplaintDto): Promise<Complaint> {
     // Check if such city exists, and if no, insert it
 
     return this.complaintModel.create(dto);
   }
 
-  async delete(id: string): Promise<DocumentType<ComplaintModel> | null> {
+  async delete(id: string): Promise<Complaint | null> {
     const deletedComplaint = this.complaintModel.findByIdAndDelete(id).exec();
 
     // TODO: delete nested persons in transaction
@@ -33,11 +29,11 @@ export class ComplaintService {
   //   return this.complaintModel.deleteMany({id: new types.ObjectId(id)}).exec();
   // }
 
-  async findByComplaintId(complaintId: string): Promise<DocumentType<ComplaintModel> | null> {
+  async findByComplaintId(complaintId: string): Promise<Complaint | null> {
     return this.complaintModel.findOne({ _id: complaintId }).exec();
   }
 
-  async findLast(limit: number): Promise<DocumentType<ComplaintModel>[]> {
+  async findLast(limit: number): Promise<Complaint[]> {
     // TODO: isActive: true
     return this.complaintModel.find({}).sort({ _id: -1 }).limit(limit).exec();
   }

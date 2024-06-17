@@ -1,21 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { CountryModel } from './country.model';
-import { DocumentType, ModelType } from '@typegoose/typegoose/lib/types';
-import { InjectModel } from 'nestjs-typegoose';
-import { CityModel } from './city.model';
+import { City, Country } from './country.schema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class CountryService {
-  constructor(
-    @InjectModel(CountryModel)
-    private readonly countryModel: ModelType<CountryModel>,
-  ) {}
+  constructor(@InjectModel(Country.name) private readonly countryModel: Model<Country>) {}
 
-  async find(): Promise<DocumentType<CountryModel>[]> {
+  async find(): Promise<Country[]> {
     return this.countryModel.find({}, { _id: 0, phoneCode: 0, cities: 0 });
   }
 
-  async findCities(countryCode: string): Promise<CityModel[]> {
+  async findCities(countryCode: string): Promise<City[]> {
     return this.countryModel.findOne({ code: countryCode }, { cities: 1 })
       .distinct('cities');
   }

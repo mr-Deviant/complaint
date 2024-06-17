@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypegooseModule } from 'nestjs-typegoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { getMongoConfig } from './configs/mongo.config';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
@@ -13,7 +13,7 @@ import { join } from 'path';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypegooseModule.forRootAsync({
+    MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: getMongoConfig,

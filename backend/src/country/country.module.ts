@@ -1,18 +1,17 @@
 import { Module } from '@nestjs/common';
-import { TypegooseModule } from 'nestjs-typegoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { CountryController } from './country.controller';
-import { CountryModel } from './country.model';
 import { CountryService } from './country.service';
+import { Country, CountrySchema } from './country.schema';
 
 @Module({
   controllers: [CountryController],
   imports: [
-    TypegooseModule.forFeature([
+    MongooseModule.forFeature([
       {
-        typegooseClass: CountryModel,
-        schemaOptions: {
-          collection: 'countries',
-        },
+        name: Country.name,
+        schema: CountrySchema,
+        collection: 'countries',
       },
     ]),
   ],

@@ -1,16 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CategoryModel } from './category.model';
-import { DocumentType, ModelType } from '@typegoose/typegoose/lib/types';
-import { InjectModel } from 'nestjs-typegoose';
+import { Category } from './category.schema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class CategoryService {
-  constructor(
-    @InjectModel(CategoryModel)
-    private readonly categoryModel: ModelType<CategoryModel>,
-  ) {}
+  constructor(@InjectModel(Category.name) private readonly categoryModel: Model<Category>) {}
 
-  async find(): Promise<DocumentType<CategoryModel>[]> {
+  async find(): Promise<Category[]> {
     return this.categoryModel.find();
   }
 }

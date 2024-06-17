@@ -1,19 +1,18 @@
 import { Module } from '@nestjs/common';
-import { TypegooseModule } from 'nestjs-typegoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ComplaintController } from './complaint.controller';
-import { ComplaintModel } from './complaint.model';
+import { Complaint, ComplaintSchema } from './complaint.schema';
 import { ComplaintService } from './complaint.service';
 import { CountryModule } from '../country/country.module';
 
 @Module({
   controllers: [ComplaintController],
   imports: [
-    TypegooseModule.forFeature([
+    MongooseModule.forFeature([
       {
-        typegooseClass: ComplaintModel,
-        schemaOptions: {
-          collection: 'complaints',
-        },
+        name: Complaint.name,
+        schema: ComplaintSchema,
+        collection: 'complaints',
       },
     ]),
     CountryModule,
