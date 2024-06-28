@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   DoCheck,
   ElementRef,
@@ -10,39 +9,43 @@ import {
   Optional,
   Self,
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroupDirective, NgControl, NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import {
+  ControlValueAccessor,
+  FormControl,
+  FormGroupDirective,
+  NgControl,
+  NgForm,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+
 import { Observable, Subject } from 'rxjs';
-import { MatFormField, MatFormFieldControl, MatLabel } from '@angular/material/form-field';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { MatFormField, MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { MatSelectChange, MatSelect } from '@angular/material/select';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { IncludesPipe } from '../../pipes/includes.pipe';
 import { FilterPipe } from '../../pipes/filter.pipe';
-import { MatOption, MatOptgroup } from '@angular/material/core';
-import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-select-with-filter',
-    templateUrl: './select-with-filter.component.html',
-    styleUrls: ['./select-with-filter.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: MatFormFieldControl, useExisting: SelectWithFilterComponent }],
-    standalone: true,
-    imports: [
-        MatFormField,
-        MatLabel,
-        MatSelect,
-        FormsModule,
-        ReactiveFormsModule,
-        NgIf,
-        NgFor,
-        MatOption,
-        NgClass,
-        MatOptgroup,
-        AsyncPipe,
-        FilterPipe,
-        IncludesPipe,
-    ],
+  selector: 'app-select-with-filter',
+  templateUrl: './select-with-filter.component.html',
+  styleUrls: ['./select-with-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: MatFormFieldControl, useExisting: SelectWithFilterComponent }],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    IncludesPipe,
+    FilterPipe,
+  ],
 })
 // https://material.angular.io/guide/creating-a-custom-form-field-control
 export class SelectWithFilterComponent
@@ -190,9 +193,9 @@ export class SelectWithFilterComponent
 
   filterControl = new FormControl('');
 
-  onChange = (value: string | null): void => {}; // +
+  onChange = (value: string | null): void => {};
 
-  onTouched = (): void => {}; // +
+  onTouched = (): void => {};
 
   writeValue(value: string | null): void {
     this.value = value;

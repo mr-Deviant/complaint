@@ -35,6 +35,12 @@
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
         ]
       }
     },
@@ -61,7 +67,8 @@
         "prettier/prettier": [
           "error",
           {
-            "parser": "angular"
+            "parser": "angular",
+            "endOfLine": "auto"
           }
         ]
       }

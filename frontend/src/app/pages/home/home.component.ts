@@ -1,37 +1,30 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { ComplaintService } from '../../services/complaint.service';
-import { RouterLink } from '@angular/router';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { MatButton } from '@angular/material/button';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { ComplaintService } from '../../services/complaint.service';
 
 @Component({
-    // selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        FormsModule,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatButton,
-        NgIf,
-        NgFor,
-        RouterLink,
-        AsyncPipe,
-    ],
+  // selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   private complaintService = inject(ComplaintService);
 
   public complaints$ = this.complaintService.getComplaints();
   public lastComplaints$ = this.complaintService.getLast(3);
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

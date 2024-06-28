@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'includes',
-    standalone: true,
+  name: 'includes',
+  standalone: true,
 })
-
 export class IncludesPipe implements PipeTransform {
   transform(item: string | number | null | undefined, text: string): boolean {
     if (item === null || item === undefined) {

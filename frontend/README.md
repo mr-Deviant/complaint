@@ -1,2 +1,2 @@
 TODO:
-
+- change favicon.ico

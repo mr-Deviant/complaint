@@ -1,57 +1,50 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatOptionModule } from '@angular/material/core';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { map, Observable, takeUntil } from 'rxjs';
+import { BaseComponent } from '../../components/base.component';
+import { SelectWithFilterComponent } from '../../components/select-with-filter/select-with-filter.component';
+import { FilterPipe } from '../../pipes/filter.pipe';
 import { CategoryService } from '../../services/category.service';
 import { CountryService } from '../../services/country.service';
+import { ComplaintService } from '../../services/complaint.service';
 import { CategoryModel } from '../../models/category.model';
 import { CountryModel } from '../../models/country.model';
-import { ComplaintTypeEnum } from '../../enums/complaint-type.enum';
-import { ComplaintService } from '../../services/complaint.service';
-import { BaseComponent } from '../../components/base.component';
-import { ComplaintType } from '../../types/complaint.type';
 import { CityModel } from 'src/app/models/city.model';
-import { Router } from '@angular/router';
-import { FilterPipe } from '../../pipes/filter.pipe';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { MatOption } from '@angular/material/core';
-import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
-import { SelectWithFilterComponent } from '../../components/select-with-filter/select-with-filter.component';
-import { MatIcon } from '@angular/material/icon';
-import { MatIconButton, MatButton } from '@angular/material/button';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
+import { ComplaintTypeEnum } from '../../enums/complaint-type.enum';
+import { ComplaintType } from '../../types/complaint.type';
 
 @Component({
-    // selector: 'app-add-complaint',
-    templateUrl: './add-complaint.component.html',
-    styleUrls: ['./add-complaint.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        MatButtonToggleGroup,
-        MatButtonToggle,
-        NgIf,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        NgFor,
-        MatIconButton,
-        MatSuffix,
-        MatIcon,
-        SelectWithFilterComponent,
-        MatAutocompleteTrigger,
-        MatAutocomplete,
-        MatOption,
-        CdkTextareaAutosize,
-        MatButton,
-        AsyncPipe,
-        FilterPipe,
-    ],
+  // selector: 'app-add-complaint',
+  templateUrl: './add-complaint.component.html',
+  styleUrls: ['./add-complaint.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    CdkTextareaAutosize,
+    SelectWithFilterComponent,
+    FilterPipe,
+  ],
 })
 export class AddComplaintComponent extends BaseComponent implements OnInit {
   private router = inject(Router);
@@ -73,30 +66,40 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
       nonNullable: true,
     }),
     // Person
-    surname: new FormControl<string | undefined>({ value: '', disabled: true }, {
-      validators: [Validators.maxLength(100)],
-      nonNullable: true,
-    }),
+    surname: new FormControl<string | undefined>(
+      { value: '', disabled: true },
+      {
+        validators: [Validators.maxLength(100)],
+        nonNullable: true,
+      },
+    ),
     // Person
-    patronymic: new FormControl<string | undefined>({ value: '', disabled: true }, {
-      validators: [Validators.maxLength(100)],
-      nonNullable: true,
-    }),
+    patronymic: new FormControl<string | undefined>(
+      { value: '', disabled: true },
+      {
+        validators: [Validators.maxLength(100)],
+        nonNullable: true,
+      },
+    ),
     // Company, Person
-    sites: new FormArray([new FormControl<string>('', {
-      validators: [Validators.maxLength(100)],
-      nonNullable: true,
-    })]),
+    sites: new FormArray([
+      new FormControl<string>('', {
+        validators: [Validators.maxLength(100)],
+        nonNullable: true,
+      }),
+    ]),
     // Company, Person
     email: new FormControl<string>('', {
       validators: [Validators.email, Validators.maxLength(100)],
       nonNullable: true,
     }),
     // Company, Person
-    phones: new FormArray([new FormControl<string>('', {
-      validators: [Validators.maxLength(20)],
-      nonNullable: true
-    })]),
+    phones: new FormArray([
+      new FormControl<string>('', {
+        validators: [Validators.maxLength(20)],
+        nonNullable: true,
+      }),
+    ]),
     // Product
     barCode: new FormControl<string>(
       { value: '', disabled: true },
@@ -180,7 +183,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
           this.cities$ = this.countryService.readCitiesByCountry(countryCode).pipe(
             map((cities: CityModel[]) => {
               return cities.map((city: CityModel) => city.name);
-            })
+            }),
           );
         }
       });
