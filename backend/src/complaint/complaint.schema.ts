@@ -1,7 +1,8 @@
-import { Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ComplaintTypeEnum } from './complaint-type.enum';
 import { HydratedDocument } from 'mongoose';
 
+@Schema()
 export class Complaint {
   @Prop()
   type: ComplaintTypeEnum;
@@ -18,8 +19,8 @@ export class Complaint {
   @Prop()
   name: string;
 
-  @Prop()
-  categoryId: string;
+  // @Prop()
+  // categoryId: string;
 
   @Prop()
   countryId: string;

@@ -7,7 +7,7 @@ export interface CommonComplaintDto {
   addedDate: Date;
   // photoUrls: string[];
   name: string;
-  categoryId: string;
+  // categoryId: string;
   countryId: string;
   countryCode: string;
   cityId: string; // Saved on backend

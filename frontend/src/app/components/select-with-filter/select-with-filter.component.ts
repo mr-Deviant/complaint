@@ -221,7 +221,7 @@ export class SelectWithFilterComponent
   }
 
   // https://stackblitz.com/edit/mat-select-with-controlvalueaccessor?file=app%2Fapp.component.ts
-  selectionChanged(event: MatSelectChange) {
+  selectionChanged(event: MatSelectChange): void {
     this.writeValue(event.value);
     this.onChange(event.value);
     this.onTouched();

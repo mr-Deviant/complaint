@@ -1,7 +1,8 @@
 // import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
-import { Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
+@Schema()
 export class Auth /*extends TimeStamps*/ {
   @Prop({ unique: true })
   email: string; // Index also will be created

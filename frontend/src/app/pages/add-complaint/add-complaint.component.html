@@ -34,6 +34,7 @@
         <input matInput [formControlName]="i" type="url" maxlength="100" />
         <button
           *ngIf="last && sites.controls.length < maxSitesNum"
+          type="text"
           matSuffix
           mat-icon-button
           (click)="addSite()"
@@ -43,6 +44,7 @@
         </button>
         <button
           *ngIf="(!last || sites.controls.length === maxSitesNum) && sites.controls.length > 1"
+          type="text"
           matSuffix
           mat-icon-button
           (click)="removeSite(i)"
@@ -64,6 +66,7 @@
         <input matInput [formControlName]="i" type="tel" maxlength="20" />
         <button
           *ngIf="last && phones.controls.length < maxPhonesNum"
+          type="text"
           matSuffix
           mat-icon-button
           (click)="addPhone()"
@@ -73,6 +76,7 @@
         </button>
         <button
           *ngIf="(!last || phones.controls.length === maxPhonesNum) && phones.controls.length > 1"
+          type="text"
           matSuffix
           mat-icon-button
           (click)="removePhone(i)"
@@ -90,12 +94,12 @@
   </div>
 
   <div class="grid-row grid-3">
-    <app-select-with-filter
-      formControlName="categoryId"
-      label="Категория"
-      [items$]="categories$"
-      subItems="subCategories"
-    ></app-select-with-filter>
+<!--    <app-select-with-filter-->
+<!--      formControlName="categoryId"-->
+<!--      label="Категория"-->
+<!--      [items$]="categories$"-->
+<!--      subItems="subCategories"-->
+<!--    ></app-select-with-filter>-->
 
     <app-select-with-filter
       formControlName="countryCode"
@@ -137,7 +141,7 @@
   </div>
 
   <div class="grid-row">
-    <button mat-flat-button color="primary">Сохранить</button>
+    <button type="submit" mat-flat-button color="primary">Сохранить</button>
   </div>
 </form>
 

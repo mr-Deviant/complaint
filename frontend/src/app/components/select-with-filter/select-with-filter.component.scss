@@ -12,16 +12,20 @@
       margin-right: 8px;
     }
 
+    .dropdown-with-filter {
+      padding-top: 0;
+    }
+
     .dropdown-filter {
       position: sticky;
       background-color: #fff;
 
       border: none;
       border-bottom: 1px solid #000;
-      height: 42px;
+      height: 48px;
       outline: none;
       padding: 0 16px;
-      top: 0;
+      top: 0px;
       width: 100%;
       z-index: 1;
     }

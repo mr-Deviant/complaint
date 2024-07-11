@@ -6,7 +6,7 @@ export interface CommonComplaintModel {
   // userId: string | null;
   // photoUrls: string[];
   name: string;
-  categoryId: string;
+  // categoryId: string;
   countryCode: string;
   cityName: string; // On back should be saved cityId
   shortDescription: string;

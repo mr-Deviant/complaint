@@ -8,6 +8,7 @@
     [disabled]="disabled"
     (focusin)="onFocusIn($event)"
     (focusout)="onFocusOut($event)"
+    panelClass="dropdown-with-filter"
   >
     <input
       type="text"
@@ -31,7 +32,7 @@
           <mat-optgroup
             *ngIf="
               (item[bindLabel] | includes: filter.value) ||
-              (item[subItems] | filter: filter.value:bindLabel).length
+              (item[subItems] | filter: filter.value: bindLabel).length
             "
             [label]="item[bindLabel]"
           >

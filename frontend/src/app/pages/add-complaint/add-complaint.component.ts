@@ -116,7 +116,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
       nonNullable: true,
     }),
     // Company, Person, Product
-    categoryId: new FormControl<string | null>(null, [Validators.required]),
+    // categoryId: new FormControl<string | null>(null, [Validators.required]),
     // Company, Person, Product
     shortDescription: new FormControl<string>('', {
       validators: [Validators.required, Validators.maxLength(150)],
