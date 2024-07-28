@@ -17,12 +17,22 @@ body {
 }
 
 body {
-  margin: 0;
+  background-color: #f9f9f9;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+}
+
+a {
+  color: #1a70c1;
+  text-decoration: none;
+  transition: 0.3s color;
+
+  &:hover {
+    color: #034d92;
+  }
 }
 
 // TODO: move to separate files
-/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
 .mat-form-field-required-marker {
   color: #f44336;
 }

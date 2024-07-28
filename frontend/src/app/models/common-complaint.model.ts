@@ -8,7 +8,9 @@ export interface CommonComplaintModel {
   name: string;
   // categoryId: string;
   countryCode: string;
-  cityName: string; // On back should be saved cityId
+  countryName?: string;
+  cityName: string | null;
+  cityUrl?: string | null;
   shortDescription: string;
   fullDescription: string;
 }

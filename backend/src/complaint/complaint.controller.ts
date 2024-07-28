@@ -12,12 +12,16 @@ export class ComplaintController {
   ) {}
 
   @Post() async create(@Body() dto: ComplaintDto) {
+    const countryName = await this.countryService.findCountryNameByCountryCode(dto.countryCode);
+    const { cityName, cityUrl } = await this.countryService.findOrCreateCity(dto.countryCode, dto.cityName);
+
     dto = {
       ...dto,
       userId: null,
       addedDate: new Date(),
-      cityId: dto.cityName ? await this.countryService.findCityOrCreate(dto.countryCode, dto.cityName) : '',
-      cityName: this.complaintService.prepareCityName(dto.cityName),
+      countryName,
+      cityName,
+      cityUrl,
     };
 
     return this.complaintService.create(dto);

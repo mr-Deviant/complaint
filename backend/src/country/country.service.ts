@@ -11,28 +11,123 @@ export class CountryService {
     return this.countryModel.find({}, { _id: 0, phoneCode: 0, cities: 0 });
   }
 
-  async findCities(countryCode: string): Promise<City[]> {
-    return this.countryModel.findOne({ code: countryCode }, { cities: 1 })
-      .distinct('cities');
+  async findCountryNameByCountryCode(countryCode: string): Promise<string> {
+    const country = await this.countryModel.findOne({ code: countryCode }, { name: 1 });
+
+    return country ? country.name : '';
   }
 
-  async findCityOrCreate(countryCode: string, cityName: string): Promise<string> {
-    cityName = cityName.trim();
+  async findCities(countryCode: string): Promise<City[]> {
+    return this.countryModel.findOne({ code: countryCode }, { cities: 1 }).distinct('cities');
+  }
 
-    const cityId = await this.countryModel
-      .find({ code: countryCode, cities: { $in: [cityName] } })
-      .limit(1)
-      .exec();
+  async findOrCreateCity(
+    countryCode: string,
+    cityName: string | null,
+  ): Promise<{ cityName: string | null; cityUrl: string | null }> {
+    let name: string | null = null;
+    let url: string | null = null;
 
-    console.log('test', cityId);
+    if (cityName) {
+      name = this.normalizeCityName(cityName);
 
-    if (!cityId) {
-      this.countryModel.updateOne(
-        { code: countryCode, cities: { $in: [cityName] } },
-        { $push: { cities: { _id: '123'/*ObjectId()*/, name: cityName, url: 'XXX' } } }
-      )
+      const existingCity = await this.countryModel
+        .findOne({ code: countryCode, cities: { $elemMatch: { name: name } } });
+
+      if (existingCity) {
+        url = existingCity.cities.find((city: City) => city.name === name)?.url || null;
+      } else {
+        url = this.convertToUrl(name);
+
+        const country = await this.countryModel.updateOne(
+          { code: countryCode },
+          { $push: { cities: { name, url } } },
+        );
+
+        if (!country.modifiedCount) {
+          name = null;
+          url = null;
+        }
+      }
     }
 
-    return '123';
+    return {
+      cityName: name,
+      cityUrl: url,
+    };
+  }
+
+  normalizeCityName(cityName: string): string {
+    return (
+      cityName
+        .trim()
+        // Split string into words
+        .replace(/[^ \-]+/g, (word: string) => {
+          // Capitalize each world
+          const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
+          // Lowercase "на" word
+          const normalizedWord = capitalizedWord.replace(/^На$/, 'на');
+
+          return normalizedWord;
+        })
+    );
+  }
+
+  convertToUrl(text: string): string {
+    return this.curToLat(text.toLowerCase().replace(' ', '-'));
+  }
+
+  curToLat(text: string): string {
+    const transform: { [key: string]: string } = {
+      // Russian
+      а: 'a',
+      б: 'b',
+      в: 'v',
+      г: 'g',
+      д: 'd',
+      е: 'e',
+      ё: 'yo',
+      ж: 'zh',
+      з: 'z',
+      и: 'i',
+      й: 'j',
+      к: 'k',
+      л: 'l',
+      м: 'm',
+      н: 'n',
+      о: 'o',
+      п: 'p',
+      р: 'r',
+      с: 's',
+      т: 't',
+      у: 'u',
+      ф: 'f',
+      х: 'h',
+      ц: 'cz',
+      ч: 'ch',
+      ш: 'sh',
+      щ: 'shh',
+      ъ: '',
+      ы: 'y',
+      ь: '',
+      э: 'e',
+      ю: 'yu',
+      я: 'ya',
+      // Belarusian
+      ў: 'u',
+      // Ukrainian
+      ґ: 'g',
+      є: 'ye',
+      ї: 'yi',
+    };
+
+    const result = text
+      .split('')
+      .map((character: string) => {
+        return transform[character] || character;
+      })
+      .join('');
+
+    return result;
   }
 }

@@ -23,16 +23,16 @@ export class Complaint {
   // categoryId: string;
 
   @Prop()
-  countryId: string;
-
-  @Prop()
   countryCode: string;
 
   @Prop()
-  cityId: string;
+  countryName: string;
 
-  @Prop()
+  @Prop({ nullable: true })
   cityName: string;
+
+  @Prop({ nullable: true })
+  cityUrl: string;
 
   @Prop()
   shortDescription: string;

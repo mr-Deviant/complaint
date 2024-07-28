@@ -8,10 +8,10 @@ export interface CommonComplaintDto {
   // photoUrls: string[];
   name: string;
   // categoryId: string;
-  countryId: string;
   countryCode: string;
-  cityId: string; // Saved on backend
-  cityName: string; // Frontend sends
+  countryName: string | null;
+  cityName: string | null;
+  cityUrl: string | null;
   shortDescription: string;
   fullDescription: string;
 }

@@ -13,15 +13,16 @@
     &-footer__inner {
       margin-left: auto;
       margin-right: auto;
-      max-width: calc($desktop-width - 20px);
-      padding-left: 10px;
-      padding-right: 10px;
+      max-width: calc($desktop-width - var(--main-horizontal-margin) * 2);
+      padding-left: var(--main-horizontal-margin);
+      padding-right: var(--main-horizontal-margin);
     }
 
     &-header {
       position: fixed;
-      background-color: #f9fafb;
+      background-color: #f6c12a;
       border-bottom: 1px solid #dededf;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.20);
       width: 100%;
       z-index: 2;
 
@@ -59,13 +60,13 @@
     &-content {
       border-top: var(--main-header-height) solid transparent;
       flex: 1 1 auto;
-      padding-top: 10px;
-      padding-bottom: 10px;
+      padding-top: 16px;
+      padding-bottom: 16px;
     }
 
     &-footer {
-      background-color: #f9fafb;
-      border-top: 1px solid #dededf;
+      background-color: #464650;
+      color: #fff;
       flex: 0 0 auto;
     }
   }

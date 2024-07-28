@@ -1,89 +1,105 @@
 <div *ngIf="complaint$ | async as complaint">
-  <div>
-    Главная > {{ complaint.countryCode }} > {{ complaint.cityName }}
+  <div class="breadcrumb">
+    <a routerLink="/" class="breadcrumb__item">Главная</a>
+    <a [routerLink]="['/', complaint.countryCode]" class="breadcrumb__item">{{ complaint.countryName }}</a>
+    @if (complaint.cityName) {
+      <a [routerLink]="['/', complaint.countryCode, complaint.cityUrl]" class="breadcrumb__item">{{
+        complaint.cityName
+      }}</a>
+    }
   </div>
 
-  <h1>{{ complaint.shortDescription }}</h1>
+  <h1 class="short-description">{{ complaint.shortDescription }}</h1>
 
-  <div class="grid-row complaint-field" style="white-space: pre;">{{ complaint.fullDescription }}</div>
+  <div class="complaint-info">
+    <div class="grid-row complaint-field full-description">{{ complaint.fullDescription }}</div>
 
-  <div class="grid-row grid-3">
-    @if (complaint.type !== ComplaintTypeEnum.Person) {
-      <div class="complaint-field">
-        <span class="complaint-field__label">Название: </span>
-        <span class="complaint-field__value">{{ complaint.name }}</span>
-      </div>
-    } @else {
-      <div class="complaint-field">
-        <span class="complaint-field__label">Фамилия: </span>
-        <span class="complaint-field__value">{{ $any(complaint).surname }}</span>
-      </div>
+    <div class="grid-row grid-3">
+      @if (complaint.type !== ComplaintTypeEnum.Person) {
+        @if (complaint.name) {
+          <div class="complaint-field">
+            <div class="complaint-field__label">Название: </div>
+            <div class="complaint-field__value">{{ complaint.name }}</div>
+          </div>
+        }
+      } @else {
+        @if ($any(complaint).surname) {
+          <div class="complaint-field">
+            <div class="complaint-field__label">Фамилия: </div>
+            <div class="complaint-field__value">{{ $any(complaint).surname }}</div>
+          </div>
+        }
 
-      <div class="complaint-field">
-        <span class="complaint-field__label">Имя: </span>
-        <span class="complaint-field__value">{{ complaint.name }}</span>
-      </div>
+        @if (complaint.name) {
+          <div class="complaint-field">
+            <div class="complaint-field__label">Имя: </div>
+            <div class="complaint-field__value">{{ complaint.name }}</div>
+          </div>
+        }
 
-      <div class="complaint-field">
-        <span class="complaint-field__label">Отчество: </span>
-        <span class="complaint-field__value">{{ $any(complaint).patronymic }}</span>
-      </div>
-    }
-
-    @if (complaint.type !== ComplaintTypeEnum.Product) {
-      @if ($any(complaint).sites.length) {
-        <div class="complaint-field">
-          <span class="complaint-field__label">Сайт/Соц. сети: </span>
-          <span class="complaint-field__value">
-          @for (site of $any(complaint).sites; track site;) {
-            {{ site }}<br />
-          }
-        </span>
-        </div>
+        @if ($any(complaint).patronymic) {
+          <div class="complaint-field">
+            <div class="complaint-field__label">Отчество: </div>
+            <div class="complaint-field__value">{{ $any(complaint).patronymic }}</div>
+          </div>
+        }
       }
 
-      @if ($any(complaint).email) {
-        <div class="complaint-field">
-          <span class="complaint-field__label">E-mail: </span>
-          <span class="complaint-field__value"><a href="mailto:{{ $any(complaint).email }}">{{ $any(complaint).email }}</a></span>
-        </div>
-      }
-
-      @if ($any(complaint).phones.length) {
-        <div class="complaint-field">
-          <span class="complaint-field__label">Телефон: </span>
-          <span class="complaint-field__value">
-            @for (phone of $any(complaint).phones; track phone;) {
-              {{ phone }}<br />
+      @if (complaint.type !== ComplaintTypeEnum.Product) {
+        @if ($any(complaint).sites.length) {
+          <div class="complaint-field">
+            <div class="complaint-field__label">Сайт/Соц. сети: </div>
+            @for (site of $any(complaint).sites; track site) {
+              <div class="complaint-field__value">{{ site }}</div>
             }
-          </span>
-        </div>
+          </div>
+        }
+
+        @if ($any(complaint).email) {
+          <div class="complaint-field">
+            <div class="complaint-field__label">E-mail: </div>
+            <div class="complaint-field__value">
+              <a href="mailto:{{ $any(complaint).email }}">{{ $any(complaint).email }}</a>
+            </div>
+          </div>
+        }
+
+        @if ($any(complaint).phones.length) {
+          <div class="complaint-field">
+            <div class="complaint-field__label">Телефон: </div>
+            @for (phone of $any(complaint).phones; track phone) {
+              <div class="complaint-field__value">{{ phone }}</div>
+            }
+          </div>
+        }
+
+      } @else {
+        @if ($any(complaint).barCode) {
+          <div class="complaint-field">
+            <div class="complaint-field__label">Штрих код: </div>
+            <div class="complaint-field__value">{{ $any(complaint).barCode }}</div>
+          </div>
+        }
       }
-
-    } @else {
-      <div class="complaint-field">
-        <span class="complaint-field__label">Штрих код: </span>
-        <span class="complaint-field__value">{{ $any(complaint).barCode }}</span>
-      </div>
-    }
-  </div>
-
-  <div class="grid-row grid-3">
-<!--    <div class="complaint-field">-->
-<!--      <span class="complaint-field__label">Категория: </span>-->
-<!--      <span class="complaint-field__value">{{ complaint.categoryId }}</span>-->
-<!--    </div>-->
-
-    <div class="complaint-field">
-      <span class="complaint-field__label">Страна: </span>
-      <span class="complaint-field__value">{{ complaint.countryCode }}</span>
     </div>
 
-    @if (complaint.cityName) {
+    <div class="grid-row grid-3">
+      <!--    <div class="complaint-field">-->
+      <!--      <div class="complaint-field__label">Категория: </div>-->
+      <!--      <div class="complaint-field__value">{{ complaint.categoryId }}</div>-->
+      <!--    </div>-->
+
       <div class="complaint-field">
-        <span class="complaint-field__label">Город: </span>
-        <span class="complaint-field__value">{{ complaint.cityName }}</span>
+        <div class="complaint-field__label">Страна: </div>
+        <div class="complaint-field__value">{{ complaint.countryName }}</div>
       </div>
-    }
+
+      @if (complaint.cityName) {
+        <div class="complaint-field">
+          <div class="complaint-field__label">Город: </div>
+          <div class="complaint-field__value">{{ complaint.cityName }}</div>
+        </div>
+      }
+    </div>
   </div>
 </div>

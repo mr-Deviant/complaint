@@ -2,4 +2,12 @@
   ///// Grid /////
   --grid-column-gap: 30px;
   --form-grid-margin-bottom: 30px;
+
+  // Main component
+  --main-horizontal-margin: 20px;
+}
+
+////// Buttons //////
+.mat-mdc-unelevated-button.mat-accent {
+  --mdc-filled-button-container-color: #353e4c !important;
 }
