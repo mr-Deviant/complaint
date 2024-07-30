@@ -10,17 +10,20 @@
 
 <div class="categories-container">
   <h2>Жалобы по странам</h2>
-  <ng-container *ngIf="complaints$ | async as complaints">
-    <ul *ngIf="complaints.countries" class="categories">
-      <li *ngFor="let country of complaints.countries" class="categories__item">
-        <a [routerLink]="['/', country.code]">{{ country.name }}</a>
+<!--  <ng-container *ngIf="complaints$ | async as complaints">-->
+  @if (complaints$ | async; as complaints) {
+    <ul class="categories">
+      <li *ngFor="let country of complaints" class="categories__item">
+        <a [routerLink]="['/', country._id]">{{ country.name }}</a>
         <ul *ngIf="country.cities" class="categories categories--sub">
           <li *ngFor="let city of country.cities">
-            <a [routerLink]="[country.code, city._id]">{{ city.name }}</a>
+            <a [routerLink]="[country._id, city.url]">{{ city.name }}</a>
           </li>
         </ul>
       </li>
     </ul>
+  }
+
     <!--  <ul *ngIf="complaints.categories">-->
     <!--    <li *ngFor="let category of complaints.categories">-->
     <!--      {{ category.name }}-->
@@ -31,14 +34,17 @@
     <!--      </ul>-->
     <!--    </li>-->
     <!--  </ul>-->
-  </ng-container>
+<!--  </ng-container>-->
 </div>
 
 <div>
   <h2>Последние добавленные жалобы:</h2>
-  <div style="display: flex">
+  <div class="grid grid-3">
     <div *ngFor="let complaint of lastComplaints$ | async" style="flex: 1 1 0;">
-      ({{ complaint.countryCode }}, {{ complaint.cityName }})
+      {{ complaint.countryName }}
+      @if (complaint.cityName) {
+        , {{ complaint.cityName }}
+      }
       <h3><a [routerLink]="['/', complaint._id]">{{ complaint.shortDescription }}</a></h3>
       <p>{{ complaint.fullDescription }}</p>
     </div>

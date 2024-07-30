@@ -5,9 +5,17 @@
 
   // Main component
   --main-horizontal-margin: 20px;
+
+  // Input
+  --mdc-outlined-text-field-focus-outline-color: #556e84 !important;
+  --mdc-outlined-text-field-focus-label-text-color: #000 !important;
 }
 
 ////// Buttons //////
 .mat-mdc-unelevated-button.mat-accent {
-  --mdc-filled-button-container-color: #353e4c !important;
+  --mdc-filled-button-container-color: #206ca0 !important;
+}
+
+.mat-mdc-unelevated-button.mat-primary {
+  --mdc-filled-button-container-color: #556e84 !important;
 }

@@ -207,14 +207,22 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
+      const value = this.form.value;
+      type arrayField = 'sites' | 'phones';
+
+      // Remove empty values from arrays
+      (['sites', 'phones'] as arrayField[]).forEach((field: arrayField) => {
+        value[field] = value[field]?.filter((item: string) => item);
+      });
+
       this.complaintService.create(this.form.value as ComplaintType).subscribe(
         (complaint: ComplaintType) => {
-          console.log('Form submit', complaint);
+          console.log('Form submit', complaint); // TODO: remove
           this.form.reset();
           this.router.navigate(['/', complaint._id]);
         },
         (error: HttpErrorResponse) => {
-          console.error("Couln't save complaint on server", error);
+          console.error("Couldn't save complaint on server", error);
         },
       );
       return;

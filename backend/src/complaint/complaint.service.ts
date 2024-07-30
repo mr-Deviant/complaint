@@ -9,8 +9,6 @@ export class ComplaintService {
   constructor(@InjectModel(Complaint.name) private readonly complaintModel: Model<Complaint>) {}
 
   async create(dto: ComplaintDto): Promise<Complaint> {
-    // Check if such city exists, and if no, insert it
-
     return this.complaintModel.create(dto);
   }
 
@@ -31,6 +29,25 @@ export class ComplaintService {
 
   async findByComplaintId(complaintId: string): Promise<Complaint | null> {
     return this.complaintModel.findOne({ _id: complaintId }).exec();
+  }
+
+  async findCountriesAndCities() {
+    return this.complaintModel.aggregate([
+      {
+        // $match: { isActive: true },
+        $group: {
+          _id: '$countryCode',
+          name: { $first: '$countryName' },
+          cities: {
+            $addToSet: {
+              name: '$cityName',
+              url: '$cityUrl',
+            }
+          },
+        },
+      },
+    ]);
+
   }
 
   async findLast(limit: number): Promise<Complaint[]> {

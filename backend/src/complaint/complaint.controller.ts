@@ -50,27 +50,28 @@ export class ComplaintController {
   }
 
   @Get() async getComplaints() {
+    return this.complaintService.findCountriesAndCities();
     return {
       countries: [
         {
           code: 'ua',
           name: 'Украина',
           cities: [
-            { _id: '12345', name: 'Киев', url: 'kiev' },
-            { _id: '09876', name: 'Харьков', url: 'harkov' },
+            { name: 'Киев', url: 'kiev' },
+            { name: 'Харьков', url: 'harkov' },
           ],
         },
         { code: 'ru', name: 'Россия', cities: [] },
       ],
-      categories: [
-        {
-          name: 'Производство и материалы',
-          subCategories: [
-            { _id: 2200, name: 'Агропром, сельское хозяйство' },
-            { _id: 2201, name: 'Геофизика, геодезия, геология' },
-          ],
-        },
-      ],
+      // categories: [
+      //   {
+      //     name: 'Производство и материалы',
+      //     subCategories: [
+      //       { _id: 2200, name: 'Агропром, сельское хозяйство' },
+      //       { _id: 2201, name: 'Геофизика, геодезия, геология' },
+      //     ],
+      //   },
+      // ],
     };
   }
 }
