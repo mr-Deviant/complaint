@@ -13,8 +13,8 @@ export class ComplaintService {
     return this.http.post<ComplaintType>('/api/complaint', data);
   }
 
-  public getComplaints(): Observable<any> { // TODO: any
-    return this.http.get<any>('/api/complaint/');
+  public getCountriesAndCities(): Observable<any> { // TODO: any
+    return this.http.get<any>('/api/complaint/countries');
   }
 
   public getComplaint(id: string | null): Observable<ComplaintType> {

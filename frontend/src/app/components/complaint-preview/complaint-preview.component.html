@@ -1,0 +1,8 @@
+{{ complaint.countryName }}
+@if (complaint.cityName) {
+  , {{ complaint.cityName }}
+}
+<h3>
+  <a [routerLink]="['/', complaint._id]">{{ complaint.shortDescription }}</a>
+</h3>
+<p>{{ complaint.fullDescription }}</p>

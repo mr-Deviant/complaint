@@ -208,10 +208,10 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       const value = this.form.value;
-      type arrayField = 'sites' | 'phones';
+      type ArrayField = 'sites' | 'phones';
 
       // Remove empty values from arrays
-      (['sites', 'phones'] as arrayField[]).forEach((field: arrayField) => {
+      (['sites', 'phones'] as ArrayField[]).forEach((field: ArrayField) => {
         value[field] = value[field]?.filter((item: string) => item);
       });
 

@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ComplaintService } from '../../services/complaint.service';
+import { ComplaintPreviewComponent } from '../../components/complaint-preview/complaint-preview.component';
 
 @Component({
   // selector: 'app-home',
@@ -20,11 +21,12 @@ import { ComplaintService } from '../../services/complaint.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    ComplaintPreviewComponent,
   ],
 })
 export class HomeComponent {
   private complaintService = inject(ComplaintService);
 
-  public complaints$ = this.complaintService.getComplaints();
+  public countries$ = this.complaintService.getCountriesAndCities();
   public lastComplaints$ = this.complaintService.getLast(3);
 }

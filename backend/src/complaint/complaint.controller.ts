@@ -27,6 +27,14 @@ export class ComplaintController {
     return this.complaintService.create(dto);
   }
 
+  @Get('/countries') async getCountriesAndCities() {
+    return this.complaintService.findCountriesAndCities();
+  }
+
+  @Get('/country-complaints/:countryCode') async getCountryComplaints(@Param('countryCode') countryCode: string) {
+    return this.complaintService.getCountryComplaints(countryCode);
+  }
+
   @Get(':id') async get(@Param('id') id: string) {
     return this.complaintService.findByComplaintId(id);
   }
@@ -47,31 +55,5 @@ export class ComplaintController {
 
   @Get('/last/:limit') async getLast(@Param('limit') limit: string) {
     return this.complaintService.findLast(parseInt(limit));
-  }
-
-  @Get() async getComplaints() {
-    return this.complaintService.findCountriesAndCities();
-    return {
-      countries: [
-        {
-          code: 'ua',
-          name: 'Украина',
-          cities: [
-            { name: 'Киев', url: 'kiev' },
-            { name: 'Харьков', url: 'harkov' },
-          ],
-        },
-        { code: 'ru', name: 'Россия', cities: [] },
-      ],
-      // categories: [
-      //   {
-      //     name: 'Производство и материалы',
-      //     subCategories: [
-      //       { _id: 2200, name: 'Агропром, сельское хозяйство' },
-      //       { _id: 2201, name: 'Геофизика, геодезия, геология' },
-      //     ],
-      //   },
-      // ],
-    };
   }
 }

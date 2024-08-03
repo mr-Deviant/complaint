@@ -10,10 +10,9 @@
 
 <div class="categories-container">
   <h2>Жалобы по странам</h2>
-<!--  <ng-container *ngIf="complaints$ | async as complaints">-->
-  @if (complaints$ | async; as complaints) {
+  @if (countries$ | async; as countries) {
     <ul class="categories">
-      <li *ngFor="let country of complaints" class="categories__item">
+      <li *ngFor="let country of countries" class="categories__item">
         <a [routerLink]="['/', country._id]">{{ country.name }}</a>
         <ul *ngIf="country.cities" class="categories categories--sub">
           <li *ngFor="let city of country.cities">
@@ -23,30 +22,13 @@
       </li>
     </ul>
   }
-
-    <!--  <ul *ngIf="complaints.categories">-->
-    <!--    <li *ngFor="let category of complaints.categories">-->
-    <!--      {{ category.name }}-->
-    <!--      <ul>-->
-    <!--        <li *ngFor="let subCategory of category.subCategories">-->
-    <!--          <a [routerLink]="[country.code, city._id, subCategory._id]">{{ subCategory.name }}</a>-->
-    <!--        </li>-->
-    <!--      </ul>-->
-    <!--    </li>-->
-    <!--  </ul>-->
-<!--  </ng-container>-->
 </div>
 
 <div>
   <h2>Последние добавленные жалобы:</h2>
   <div class="grid grid-3">
     <div *ngFor="let complaint of lastComplaints$ | async" style="flex: 1 1 0;">
-      {{ complaint.countryName }}
-      @if (complaint.cityName) {
-        , {{ complaint.cityName }}
-      }
-      <h3><a [routerLink]="['/', complaint._id]">{{ complaint.shortDescription }}</a></h3>
-      <p>{{ complaint.fullDescription }}</p>
+      <app-complaint-preview [complaint]="complaint"></app-complaint-preview>
     </div>
   </div>
 </div>

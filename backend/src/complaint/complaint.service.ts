@@ -32,6 +32,7 @@ export class ComplaintService {
   }
 
   async findCountriesAndCities() {
+    // TODO: top 5 cities order by number of complaints in them
     return this.complaintModel.aggregate([
       {
         // $match: { isActive: true },
@@ -42,12 +43,30 @@ export class ComplaintService {
             $addToSet: {
               name: '$cityName',
               url: '$cityUrl',
-            }
+            },
           },
         },
       },
     ]);
+  }
 
+  async getCountryComplaints(countryCode: string) {
+    // TODO: not ready
+    return this.complaintModel.aggregate([
+      {
+        $match: { countryCode: countryCode }, // TODO: isActive: true
+        $group: {
+          _id: '$countryCode',
+          name: { $first: '$countryName' },
+          cities: {
+            $addToSet: {
+              name: '$cityName',
+              url: '$cityUrl',
+            },
+          },
+        },
+      },
+    ]);
   }
 
   async findLast(limit: number): Promise<Complaint[]> {
