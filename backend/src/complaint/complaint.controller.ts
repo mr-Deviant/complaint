@@ -1,8 +1,20 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post } from '@nestjs/common';
-import { ComplaintDto } from './dto/complaint.dto';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ComplaintService } from './complaint.service';
 import { COMPLAINT_NOT_FOUND } from './complaint.constants';
 import { CountryService } from '../country/country.service';
+import { ComplaintDto } from './dto/complaint.dto';
 
 @Controller('complaint')
 export class ComplaintController {
@@ -11,6 +23,8 @@ export class ComplaintController {
     private readonly countryService: CountryService,
   ) {}
 
+  @UsePipes(new ValidationPipe())
+  // Class validator is not working with type (CompanyDto | PersonDto | ProductDto), only with class
   @Post() async create(@Body() dto: ComplaintDto) {
     const countryName = await this.countryService.findCountryNameByCountryCode(dto.countryCode);
     const { cityName, cityUrl } = await this.countryService.findOrCreateCity(dto.countryCode, dto.cityName);
@@ -39,6 +53,7 @@ export class ComplaintController {
     return this.complaintService.findByComplaintId(id);
   }
 
+  @UsePipes(new ValidationPipe())
   @Patch(':id')
   async patch(@Param('id') id: string, @Body() dto: ComplaintDto) {
     // TODO:
