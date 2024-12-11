@@ -1,17 +1,4 @@
 :host {
-  .breadcrumb {
-    margin-bottom: 16px;
-
-    &__item {
-      &:not(:first-child)::before {
-        content: '›';
-        color: unset;
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-    }
-  }
-
   .short-description {
     margin-bottom: 25px;
   }

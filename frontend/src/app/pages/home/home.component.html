@@ -1,4 +1,4 @@
-<div class="search-container">
+<!--div class="search-container">
   <form class="search" role="search">
     <mat-form-field class="search__input">
       <mat-label>Поиск по каталогу жалоб</mat-label>
@@ -6,15 +6,15 @@
     </mat-form-field>
     <button mat-flat-button color="primary" class="search__button">Поиск</button>
   </form>
-</div>
+</div-->
 
-<div class="categories-container">
+<div class="countries-container">
   <h2>Жалобы по странам</h2>
   @if (countries$ | async; as countries) {
-    <ul class="categories">
-      <li *ngFor="let country of countries" class="categories__item">
+    <ul class="countries grid grid-3">
+      <li *ngFor="let country of countries">
         <a [routerLink]="['/', country._id]">{{ country.name }}</a>
-        <ul *ngIf="country.cities" class="categories categories--sub">
+        <ul *ngIf="country.cities" class="cities">
           <li *ngFor="let city of country.cities">
             <a [routerLink]="[country._id, city.url]">{{ city.name }}</a>
           </li>
@@ -24,7 +24,7 @@
   }
 </div>
 
-<div>
+<div class="last-container">
   <h2>Последние добавленные жалобы:</h2>
   <div class="grid grid-3">
     <div *ngFor="let complaint of lastComplaints$ | async" style="flex: 1 1 0;">

@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { City } from './country.schema';
+import { City, Country } from './country.schema';
 import { CountryService } from './country.service';
 
 @Controller('country')
@@ -8,7 +8,12 @@ export class CountryController {
 
   @Get()
   async getAll() { // TODO: create dto
-    return this.countryService.find();
+    return this.countryService.findCountriesAndCities();
+  }
+
+  @Get(':countryCode')
+  async getCountryAndCities(@Param() params: { countryCode: string }): Promise<Country | null> {
+    return this.countryService.findCountryAndCities(params.countryCode);
   }
 
   @Get(':countryCode/city')

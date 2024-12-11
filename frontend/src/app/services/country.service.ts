@@ -14,6 +14,10 @@ export class CountryService {
     return this.http.get<CountryModel[]>('/api/country');
   }
 
+  public getCountryAndCities(countryCode: string | null): Observable<any> { // TODO: any
+    return this.http.get<any>(`/api/country/${countryCode}`);
+  }
+
   public readCitiesByCountry(countryCode: string): Observable<CityModel[]> {
     return this.http.get<CityModel[]>(`/api/country/${countryCode}/city`);
   }

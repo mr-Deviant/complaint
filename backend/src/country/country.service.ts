@@ -7,8 +7,12 @@ import { InjectModel } from '@nestjs/mongoose';
 export class CountryService {
   constructor(@InjectModel(Country.name) private readonly countryModel: Model<Country>) {}
 
-  async find(): Promise<Country[]> {
+  async findCountriesAndCities(): Promise<Country[]> {
     return this.countryModel.find({}, { _id: 0, phoneCode: 0, cities: 0 });
+  }
+
+  async findCountryAndCities(countryCode: string): Promise<Country | null> {
+    return this.countryModel.findOne({ code: countryCode }, { _id: 0, phoneCode: 0 });
   }
 
   async findCountryNameByCountryCode(countryCode: string): Promise<string> {

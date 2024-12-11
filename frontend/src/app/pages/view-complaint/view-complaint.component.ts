@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ComplaintService } from '../../services/complaint.service';
 import { ComplaintTypeEnum } from 'src/app/enums/complaint-type.enum';
+import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-view-complaint',
@@ -10,6 +11,7 @@ import { ComplaintTypeEnum } from 'src/app/enums/complaint-type.enum';
   imports: [
     CommonModule,
     RouterModule,
+    BreadcrumbComponent,
   ],
   templateUrl: './view-complaint.component.html',
   styleUrl: './view-complaint.component.scss',

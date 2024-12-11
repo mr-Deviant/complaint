@@ -1,0 +1,6 @@
+<a routerLink="/" class="item">Главная</a>
+@for (item of data; track item.text) {
+  @if (item.text) {
+    <a [routerLink]="item.link" class="item">{{ item.text }}</a>
+  }
+}

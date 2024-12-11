@@ -1,0 +1,10 @@
+:host {
+  margin-bottom: 16px;
+
+  .item:not(:first-child)::before {
+    content: '›';
+    color: unset;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

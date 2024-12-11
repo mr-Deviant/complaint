@@ -1,13 +1,10 @@
 <div *ngIf="complaint$ | async as complaint">
-  <div class="breadcrumb">
-    <a routerLink="/" class="breadcrumb__item">Главная</a>
-    <a [routerLink]="['/', complaint.countryCode]" class="breadcrumb__item">{{ complaint.countryName }}</a>
-    @if (complaint.cityName) {
-      <a [routerLink]="['/', complaint.countryCode, complaint.cityUrl]" class="breadcrumb__item">{{
-        complaint.cityName
-      }}</a>
-    }
-  </div>
+  <app-breadcrumb
+    [data]="[
+      { link: ['/', complaint.countryCode], text: complaint.countryName },
+      { link: ['/', complaint.countryCode, complaint.cityUrl], text: complaint.cityName }
+    ]"
+  ></app-breadcrumb>
 
   <h1 class="short-description">{{ complaint.shortDescription }}</h1>
 

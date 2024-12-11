@@ -1,1 +1,13 @@
-<p>country works!</p>
+<div *ngIf="country$ | async as country">
+  <app-breadcrumb [data]="[{link: ['/', country.code], text: country.name}]"></app-breadcrumb>
+
+  @if (country.cities) {
+    <ul class="cities">
+    @for (city of country.cities; track city._id;) {
+      <li>
+        <a [routerLink]="['/', country.code, city.url]">{{ city.name }}</a>
+      </li>
+    }
+    </ul>
+  }
+</div>
