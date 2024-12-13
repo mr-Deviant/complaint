@@ -124,7 +124,7 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
     }),
     // Company, Person, Product
     fullDescription: new FormControl<string>('', {
-      validators: [Validators.required, Validators.maxLength(2000)],
+      validators: [Validators.required, Validators.maxLength(5000)],
       nonNullable: true,
     }),
   });
@@ -219,7 +219,11 @@ export class AddComplaintComponent extends BaseComponent implements OnInit {
         (complaint: ComplaintType) => {
           console.log('Form submit', complaint); // TODO: remove
           this.form.reset();
-          this.router.navigate(['/', complaint._id]);
+          this.router.navigate(
+            complaint.cityUrl
+              ? ['/', 'country', complaint.countryCode, 'city', complaint.cityUrl, 'complaint', complaint._id]
+              : ['/', 'country', complaint.countryCode, 'complaint', complaint._id],
+          );
         },
         (error: HttpErrorResponse) => {
           console.error("Couldn't save complaint on server", error);

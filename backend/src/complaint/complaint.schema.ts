@@ -63,6 +63,9 @@ export class Complaint {
   // Product
   @Prop()
   barCode?: string;
+
+  @Prop()
+  isActive: boolean;
 }
 
 export type ComplaintDocument = HydratedDocument<Complaint>;

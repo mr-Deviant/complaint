@@ -1,8 +1,11 @@
-{{ complaint.countryName }}
-@if (complaint.cityName) {
-  , {{ complaint.cityName }}
-}
-<h3>
-  <a [routerLink]="['/', complaint._id]">{{ complaint.shortDescription }}</a>
+{{ complaint.countryName }}@if (complaint.cityName) {, {{ complaint.cityName }}}
+<h3 class="short-description">
+  <a
+    [routerLink]="
+      complaint.cityUrl
+      ? ['/', 'country', complaint.countryCode, 'city', complaint.cityUrl, 'complaint', complaint._id]
+      : ['/', 'country', complaint.countryCode, 'complaint', complaint._id]
+    "
+  >{{ complaint.shortDescription }}</a>
 </h3>
-<p>{{ complaint.fullDescription }}</p>
+<p class="full-description">{{ complaint.fullDescription }}</p>

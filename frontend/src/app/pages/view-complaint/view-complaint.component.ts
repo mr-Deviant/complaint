@@ -18,9 +18,9 @@ import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.comp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewComplaintComponent {
-  private route = inject(ActivatedRoute);
+  private activatedRoute = inject(ActivatedRoute);
   private complaintService = inject(ComplaintService);
-  private complaintId = this.route.snapshot.paramMap.get('id');
+  private complaintId = this.activatedRoute.snapshot.paramMap.get('complaintId');
   public complaint$ = this.complaintService.getComplaint(this.complaintId);
   public ComplaintTypeEnum = ComplaintTypeEnum;
 }

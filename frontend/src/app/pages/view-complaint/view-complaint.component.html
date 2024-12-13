@@ -1,8 +1,8 @@
 <div *ngIf="complaint$ | async as complaint">
   <app-breadcrumb
     [data]="[
-      { link: ['/', complaint.countryCode], text: complaint.countryName },
-      { link: ['/', complaint.countryCode, complaint.cityUrl], text: complaint.cityName }
+      { link: ['/', 'country', complaint.countryCode], text: complaint.countryName },
+      { link: ['/', 'country', complaint.countryCode, 'city', complaint.cityUrl], text: complaint.cityName }
     ]"
   ></app-breadcrumb>
 

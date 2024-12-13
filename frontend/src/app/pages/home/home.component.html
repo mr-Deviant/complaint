@@ -13,10 +13,10 @@
   @if (countries$ | async; as countries) {
     <ul class="countries grid grid-3">
       <li *ngFor="let country of countries">
-        <a [routerLink]="['/', country._id]">{{ country.name }}</a>
+        <a [routerLink]="['/', 'country', country._id]">{{ country.name }}</a>
         <ul *ngIf="country.cities" class="cities">
           <li *ngFor="let city of country.cities">
-            <a [routerLink]="[country._id, city.url]">{{ city.name }}</a>
+            <a [routerLink]="['/', 'country', country._id, 'city', city.url]">{{ city.name }}</a>
           </li>
         </ul>
       </li>
@@ -27,7 +27,7 @@
 <div class="last-container">
   <h2>Последние добавленные жалобы:</h2>
   <div class="grid grid-3">
-    <div *ngFor="let complaint of lastComplaints$ | async" style="flex: 1 1 0;">
+    <div *ngFor="let complaint of lastComplaints$ | async" style="overflow: hidden;">
       <app-complaint-preview [complaint]="complaint"></app-complaint-preview>
     </div>
   </div>

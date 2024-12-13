@@ -36,6 +36,7 @@ export class ComplaintController {
       countryName,
       cityName,
       cityUrl,
+      isActive: false,
     };
 
     return this.complaintService.create(dto);

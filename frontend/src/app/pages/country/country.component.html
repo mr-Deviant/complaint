@@ -1,13 +1,21 @@
 <div *ngIf="country$ | async as country">
-  <app-breadcrumb [data]="[{link: ['/', country.code], text: country.name}]"></app-breadcrumb>
+  <app-breadcrumb [data]="[{link: ['/', 'country', country.code], text: country.name}]"></app-breadcrumb>
 
   @if (country.cities) {
+    <h2>Города</h2>
     <ul class="cities">
     @for (city of country.cities; track city._id;) {
       <li>
-        <a [routerLink]="['/', country.code, city.url]">{{ city.name }}</a>
+        <a [routerLink]="['/', 'country', country.code, 'city', city.url]">{{ city.name }}</a>
       </li>
     }
     </ul>
   }
+
+  <h2>Последние добавленные жалобы:</h2>
+  <div class="grid grid-3">
+    <div *ngFor="let complaint of lastComplaints$ | async" style="flex: 1 1 0;">
+      <app-complaint-preview [complaint]="complaint"></app-complaint-preview>
+    </div>
+  </div>
 </div>

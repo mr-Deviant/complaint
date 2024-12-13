@@ -38,7 +38,7 @@ export class ComplaintDto {
   shortDescription: string;
 
   @IsNotEmpty()
-  @MaxLength(2000)
+  @MaxLength(5000)
   fullDescription: string;
 
   // Company, Person
@@ -84,4 +84,6 @@ export class ComplaintDto {
   // @IsOptional() // Check if null or undefined
   @MaxLength(50)
   barCode: string;
+
+  isActive: boolean;
 }

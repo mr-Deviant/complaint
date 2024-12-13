@@ -14,15 +14,31 @@ export default [
         loadComponent: () => import('../add-complaint/add-complaint.component').then(m => m.AddComplaintComponent),
       },
       {
-        path: ':countryCode',
+        path: 'country',
+        redirectTo: '',
+      },
+      {
+        path: 'country/:countryCode',
         loadComponent: () => import('../country/country.component').then(m => m.CountryComponent),
       },
       {
-        path: ':countryCode/:cityUrl',
+        path: 'country/:countryCode/city',
+        redirectTo: 'countries/:countryCode',
+      },
+      {
+        path: 'country/:countryCode/city/null',
+        redirectTo: 'country/:countryCode',
+      },
+      {
+        path: 'country/:countryCode/city/:cityUrl',
         loadComponent: () => import('../city/city.component').then(m => m.CityComponent),
       },
       {
-        path: ':countryCode/:cityUrl/:complaintId',
+        path: 'country/:countryCode/complaint/:complaintId',
+        loadComponent: () => import('../view-complaint/view-complaint.component').then(m => m.ViewComplaintComponent),
+      },
+      {
+        path: 'country/:countryCode/city/:cityUrl/complaint/:complaintId',
         loadComponent: () => import('../view-complaint/view-complaint.component').then(m => m.ViewComplaintComponent),
       },
     ],

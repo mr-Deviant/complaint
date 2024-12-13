@@ -1,0 +1,15 @@
+:host {
+  .short-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .full-description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 12;
+    -webkit-box-orient: vertical;
+    white-space: pre-wrap;
+  }
+}
