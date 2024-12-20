@@ -47,7 +47,9 @@
           <div class="complaint-field">
             <div class="complaint-field__label">Сайт/Соц. сети: </div>
             @for (site of $any(complaint).sites; track site) {
-              <div class="complaint-field__value">{{ site }}</div>
+              <div class="complaint-field__value">
+                <a [href]="site" target="_blank" rel="nofollow">{{ site }}</a>
+              </div>
             }
           </div>
         }
