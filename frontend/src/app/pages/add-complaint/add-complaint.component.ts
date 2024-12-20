@@ -10,7 +10,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { map, Observable, takeUntil } from 'rxjs';
 import { BaseComponent } from '../../components/base.component';
 import { SelectWithFilterComponent } from '../../components/select-with-filter/select-with-filter.component';
@@ -41,7 +40,6 @@ import { ComplaintType } from '../../types/complaint.type';
     MatIconModule,
     MatAutocompleteModule,
     MatOptionModule,
-    CdkTextareaAutosize,
     SelectWithFilterComponent,
     FilterPipe,
   ],
