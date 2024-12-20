@@ -20,35 +20,35 @@
     />
     <ng-container *ngIf="items$ | async as items">
 <!--      <mat-option *ngIf="!required" [value]="null">Не выбрано</mat-option>-->
-
-      <ng-container *ngIf="!subItems">
-        <mat-option *ngFor="let item of items | filter: filter.value: bindLabel" [value]="item[bindValue]">
-          <div class="flag" [ngClass]="showFlag ? 'flag-' + item[bindValue] : ''"></div>{{ item[bindLabel] }}
-        </mat-option>
-      </ng-container>
-
-      <ng-container *ngIf="subItems">
-        <ng-container *ngFor="let item of items">
-          <mat-optgroup
-            *ngIf="
-              (item[bindLabel] | includes: filter.value) ||
-              (item[subItems] | filter: filter.value: bindLabel).length
-            "
-            [label]="item[bindLabel]"
-          >
-            <ng-container *ngFor="let subItem of item[subItems]">
-              <mat-option
-                *ngIf="(item[bindLabel] | includes: filter.value) || (subItem[bindLabel] | includes: filter.value)"
-                [value]="subItem[bindValue]"
-              >
-                {{ subItem[bindLabel] }}
-              </mat-option>
-            </ng-container>
-          </mat-optgroup>
-        </ng-container>
-      </ng-container>
-
-      <mat-option *ngIf="!items.length" disabled>Ничего не найдено</mat-option>
+      @if (!subItems) {
+        @for (item of items | filter: filter.value: bindLabel; track item[bindValue]) {
+          <mat-option [value]="item[bindValue]">
+            <div class="flag" [ngClass]="showFlag ? 'flag-' + item[bindValue] : ''"></div>{{ item[bindLabel] }}
+          </mat-option>
+        } @empty {
+          <mat-option disabled>Ничего не найдено</mat-option>
+        }
+      } @else {
+        @for (item of items; track item[bindLabel]) {
+          @if (
+            (item[bindLabel] | includes: filter.value)
+            || (item[subItems] | filter: filter.value: bindLabel).length
+          ) {
+            <mat-optgroup [label]="item[bindLabel]">
+              @for (subItem of item[subItems]; track subItem[bindValue]) {
+                <mat-option
+                  *ngIf="(item[bindLabel] | includes: filter.value) || (subItem[bindLabel] | includes: filter.value)"
+                  [value]="subItem[bindValue]"
+                >
+                  {{ subItem[bindLabel] }}
+                </mat-option>
+              }
+            </mat-optgroup>
+          }
+        } @empty {
+          <mat-option disabled>Ничего не найдено</mat-option>
+        }
+      }
     </ng-container>
   </mat-select>
 </mat-form-field>
